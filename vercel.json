@@ -1,0 +1,24 @@
+{
+  "functions": {
+    "api/search.js": {
+      "maxDuration": 30
+    },
+    "api/search-real.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/",
+      "destination": "/public/index.html"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/public/index.html"
+    }
+  ]
+}

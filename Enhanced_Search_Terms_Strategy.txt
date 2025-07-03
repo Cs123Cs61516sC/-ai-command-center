@@ -1,0 +1,146 @@
+ENHANCED AI OPPORTUNITY SEARCH STRATEGY - UPDATED
+================================================
+
+NEW HIGH-VALUE SEARCH TERMS (ADDED):
+-----------------------------------
+
+SOLUTIONS ARCHITECT ROLES:
+- "solutions architect" CRM
+- "solutions architect" "digital transformation"
+- "solutions architect" salesforce OR dynamics
+- "solutions architect" "system integration"
+WHY: These roles indicate complex system needs perfect for AI integration
+
+SALES/PRE-SALES ENGINEERING:
+- "sales engineer" software OR saas
+- "pre-sales consultant" CRM
+- "pre-sales consultant" "technical implementation"
+- "sales engineer" "solution design"
+WHY: Companies hiring these roles need technical sales support = AI opportunity
+
+IMPLEMENTATION SPECIALISTS:
+- "implementation consultant" CRM
+- "implementation consultant" ERP
+- "implementation consultant" "business systems"
+- "CRM implementation" consultant OR specialist
+WHY: Active implementations = immediate AI enhancement opportunities
+
+CRM-SPECIFIC ROLES:
+- "CRM specialist" automation
+- "business systems analyst" CRM
+- "CRM manager" "process improvement"
+- "CRM administrator" "workflow automation"
+- "salesforce administrator" "sales operations"
+- "sales operations manager" enablement
+WHY: Direct CRM roles show manual processes needing automation
+
+TRANSFORMATION INDICATORS:
+- "revamp CRM" OR "CRM overhaul"
+- "workflow automation" specialist
+- "process improvement" manager
+- "sales enablement" technology
+WHY: Active transformation = budget and urgency
+
+INDUSTRY-SPECIFIC COMBINATIONS:
+- "construction sales" + "CRM"
+- "field service" + "CRM"
+- "field service" + "scheduling"
+- "construction" + "project management" + "software"
+WHY: Vertical-specific needs = higher value solutions
+
+
+ORIGINAL SEARCH TERMS (KEEP USING):
+-----------------------------------
+- "data entry" "multiple systems"
+- "reconciliation" spreadsheet
+- "customer service" "high volume"
+- "reporting analyst" excel
+- "operations coordinator" manual
+- "accounts payable" clerk
+- "invoice processing"
+- "inventory control"
+
+
+PARTNERSHIP OPPORTUNITY INDICATORS:
+----------------------------------
+When reviewing job postings, look for these partnership signals:
+
+CONSULTING FIRMS HIRING:
+- Multiple implementation consultants
+- Various industry focuses
+- "Client-facing" roles
+- Partner/channel programs mentioned
+
+TECHNOLOGY COMPANIES:
+- Integration specialists
+- API developers
+- Partner success managers
+- Channel account managers
+
+SYSTEM INTEGRATORS:
+- Multiple CRM consultants
+- Cross-platform expertise
+- Professional services expansion
+
+INDUSTRY-SPECIFIC SOFTWARE:
+- Vertical market focus
+- Integration needs
+- Manual processes mentioned
+
+
+ENHANCED SEARCH QUERIES:
+-----------------------
+
+HIGH-PARTNERSHIP POTENTIAL:
+Query: "implementation consultant" AND ("multiple clients" OR "consulting firm")
+Why: Consulting firms need AI tools for their clients
+
+Query: "partner success" OR "channel manager" CRM
+Why: Companies with partner programs = multiplication opportunity
+
+Query: "solutions architect" "professional services"
+Why: PS firms are perfect channel partners
+
+TRANSFORMATION PROJECTS:
+Query: "CRM implementation" AND ("project" OR "initiative")
+Why: Active projects need immediate help
+
+Query: "digital transformation" AND ("consultant" OR "manager")
+Why: Transformation = big budgets
+
+VERTICAL MARKETS:
+Query: "construction" AND ("CRM" OR "project management software")
+Why: Industry-specific solutions command premium
+
+Query: "field service" AND ("scheduling" OR "dispatch")
+Why: Complex logistics = high-value AI
+
+
+WEEKLY SEARCH ROTATION:
+----------------------
+Monday: Solutions Architect + Sales Engineer roles
+Tuesday: Implementation Consultant + CRM Specialist
+Wednesday: Transformation + Process Improvement
+Thursday: Industry-specific (Construction, Field Service)
+Friday: Partnership opportunities + Channel roles
+
+
+SCORING ENHANCEMENT:
+------------------
+Add these to your scoring system:
++10 points: Consulting firm (multiple clients)
++15 points: Technology vendor (integration partner)
++20 points: Has partner/channel program
++10 points: Industry-specific solution needed
++15 points: "Transformation" or "revamp" mentioned
++10 points: Multiple locations/entities
++5 points: "Scaling" or "growth" mentioned
+
+
+RED FLAGS TO AVOID:
+------------------
+- "Maintain existing system"
+- "No changes to current process"
+- "Traditional methods preferred"
+- "Limited technology budget"
+- "Steady state operations"

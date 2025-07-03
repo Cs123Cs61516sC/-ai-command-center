@@ -1,0 +1,82 @@
+AI POTENTIAL ANALYSIS FRAMEWORK FOR JOB POSTINGS
+================================================
+
+SCORING SYSTEM (0-100 POINTS)
+-----------------------------
+
+1. MANUAL PROCESS INDICATORS (30 points max)
+   □ "Manual data entry" mentioned (+10)
+   □ "Repetitive tasks" or similar (+10)
+   □ "Time-consuming processes" (+5)
+   □ "Multiple systems" without integration (+5)
+
+2. DATA & ANALYTICS NEEDS (25 points max)
+   □ "Reporting" or "analytics" requirements (+10)
+   □ "Data integration" challenges (+10)
+   □ "Real-time" anything (+5)
+
+3. SCALE INDICATORS (20 points max)
+   □ "Growing" or "scaling" company (+10)
+   □ High volume metrics mentioned (+10)
+
+4. TECHNOLOGY GAPS (15 points max)
+   □ Legacy systems mentioned (+10)
+   □ Excel-based processes (+5)
+
+5. COMPLIANCE/QUALITY (10 points max)
+   □ Regulatory requirements (+5)
+   □ Quality control needs (+5)
+
+SCORING INTERPRETATION:
+- 70-100: HIGH POTENTIAL - Perfect for AI takeover
+- 40-69: MEDIUM POTENTIAL - Good opportunities exist
+- 0-39: LOW POTENTIAL - Limited AI application
+
+KEY PHRASES TO LOOK FOR:
+------------------------
+POSITIVE INDICATORS:
+✓ "streamline processes"
+✓ "improve efficiency"
+✓ "reduce errors"
+✓ "automate"
+✓ "optimize"
+✓ "scale operations"
+✓ "data-driven"
+✓ "digital transformation"
+✓ "modernize"
+
+RED FLAGS (May indicate resistance):
+✗ "traditional methods preferred"
+✗ "minimal technology"
+✗ "established processes" (without mention of improvement)
+✗ "legacy system maintenance only"
+
+QUICK EVALUATION TEMPLATE:
+-------------------------
+Company: [Name]
+Position: [Title]
+URL: [Link]
+
+Score Breakdown:
+- Manual Processes: __/30
+- Data & Analytics: __/25
+- Scale Indicators: __/20
+- Technology Gaps: __/15
+- Compliance/Quality: __/10
+TOTAL: __/100
+
+Key Opportunities:
+1. [Process that could be automated]
+2. [Data integration opportunity]
+3. [AI enhancement possibility]
+
+Estimated AI Impact:
+- Time Savings: __%
+- Cost Reduction: $___
+- Efficiency Gain: __x
+
+Next Steps:
+□ Research company further
+□ Identify decision makers
+□ Prepare customized pitch
+□ Apply/Contact

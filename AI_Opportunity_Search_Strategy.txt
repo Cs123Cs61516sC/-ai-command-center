@@ -1,0 +1,67 @@
+AI CONSULTING OPPORTUNITY SEARCH STRATEGY
+========================================
+
+TARGET SEARCH TERMS:
+-------------------
+W2/1099 Positions:
+- "CRM consultant" "salesforce" OR "dynamics"
+- "solutions architect" "digital transformation"
+- "implementation consultant" healthcare OR manufacturing
+- "sales engineer" automation OR IoT
+- "technical consultant" "process improvement"
+
+B2B Consultation:
+- "RFP" "AI implementation" OR "automation"
+- "seeking consultant" "digital transformation"
+- "process automation" consultant needed
+- "modernization project" "looking for partner"
+- "efficiency improvement" "consultant wanted"
+
+RECOMMENDED JOB BOARDS:
+----------------------
+General:
+- Indeed.com
+- LinkedIn Jobs
+- ZipRecruiter
+- Glassdoor
+
+Consulting/Contract:
+- Upwork (B2B projects)
+- Toptal
+- Catalant
+- FlexJobs
+
+B2B Specific:
+- Clutch.co (companies seeking vendors)
+- G2.com (software buyers)
+- Capterra (software selection)
+
+Industry Specific:
+- HealthcareIT Central
+- Manufacturing.net Jobs
+- BankingExchange Career Center
+
+AUTOMATION INDICATORS TO LOOK FOR:
+----------------------------------
+✓ Manual processes mentioned
+✓ "Efficiency" or "optimization" in description
+✓ Data integration challenges
+✓ Multiple system mentions
+✓ Reporting/analytics needs
+✓ Customer experience focus
+✓ Compliance requirements
+✓ Scale/growth challenges
+
+HIGH-POTENTIAL INDUSTRIES:
+-------------------------
+1. Healthcare (EMR, billing, compliance)
+2. Financial Services (risk, compliance, customer service)
+3. Manufacturing (IoT, quality, supply chain)
+4. Professional Services (workflow, billing, CRM)
+5. Retail/E-commerce (inventory, personalization)
+
+SEARCH FREQUENCY:
+----------------
+- Daily: Indeed, LinkedIn (set up alerts)
+- Weekly: Specialized boards
+- Bi-weekly: B2B marketplaces

@@ -1,0 +1,205 @@
+COMPANY CONTACT RESEARCH & OUTREACH GUIDE
+=========================================
+
+TOP PRIORITY TARGETS WITH SPECIFIC INTEL
+----------------------------------------
+
+1. CAFE RIO (139 AP Clerk positions)
+-----------------------------------
+Company Size: 130+ locations across 13 states
+Revenue: ~$500M annually
+Decision Makers to Target:
+- CFO/VP Finance
+- Controller
+- AP Manager
+- IT Director
+
+LinkedIn Search Strings:
+- "Cafe Rio" AND (CFO OR "Chief Financial" OR Controller)
+- "Cafe Rio" AND ("Accounts Payable" OR "AP Manager")
+- "Cafe Rio" AND ("IT Director" OR "Technology")
+
+Key Pain Points to Mention:
+- Multi-location invoice processing complexity
+- Food service = high volume of vendor invoices
+- Franchise vs corporate location reconciliation
+- Real-time food cost analysis needs
+
+Outreach Angle: "I noticed you're hiring 139 AP clerks. What if one system could handle all locations with 99% accuracy?"
+
+
+2. VALLEY BEHAVIORAL HEALTH
+---------------------------
+Type: Healthcare/Mental Health Services
+Compliance: HIPAA, healthcare billing complexity
+Decision Makers:
+- CFO
+- Revenue Cycle Director
+- Billing Manager
+- Compliance Officer
+
+Key Pain Points:
+- Insurance claim processing
+- Patient billing complexities
+- Compliance documentation
+- Multi-payer reconciliation
+
+Outreach Angle: "Healthcare billing automation that ensures HIPAA compliance while reducing billing errors by 95%"
+
+
+3. ASSOCIATED FOOD STORES
+-------------------------
+Type: Wholesale food distributor
+Scale: Serves 400+ independent retailers
+Decision Makers:
+- VP Operations
+- Controller
+- Procurement Director
+
+Key Pain Points:
+- High volume vendor invoices
+- Complex rebate calculations
+- Multi-entity reconciliation
+- Inventory/AP matching
+
+Outreach Angle: "Process 10,000+ invoices monthly with zero manual entry"
+
+
+4. TELARUS (Reporting Analysts)
+-------------------------------
+Type: Technology Services Distributor
+Focus: Cloud, connectivity, cybersecurity
+Decision Makers:
+- VP of Operations
+- Director of Analytics
+- Business Intelligence Manager
+
+LinkedIn Intel:
+- Growing rapidly (check recent funding/expansion news)
+- Tech-forward culture = receptive to automation
+
+Key Pain Points:
+- Partner commission calculations
+- Multi-vendor data aggregation
+- Real-time dashboard needs
+- Sales performance analytics
+
+Outreach Angle: "Transform your Excel-based reporting into real-time automated insights"
+
+
+5. CHANNELBOUND LLC (ACA Reporting)
+-----------------------------------
+Type: Benefits/Compliance Technology
+Specialty: ACA reporting services
+Decision Makers:
+- CEO/Founder (smaller company)
+- Head of Operations
+- Compliance Director
+
+Key Pain Points:
+- Multiple client data formats
+- Tight compliance deadlines
+- Manual data transformation
+- Error risk in compliance reporting
+
+Outreach Angle: "Automate ACA data transformation with 100% compliance accuracy"
+
+
+RESEARCH TOOLS & TACTICS
+------------------------
+
+1. LINKEDIN SALES NAVIGATOR SEARCHES:
+   - Company employees > Current > Title keywords
+   - Look for recent job changes (new decision makers)
+   - Check who's viewing job postings (likely hiring manager)
+
+2. COMPANY WEBSITE RESEARCH:
+   - Press releases for expansion/growth (budget available)
+   - Leadership/team pages for names
+   - Tech stack clues (partners/integrations page)
+
+3. EMAIL FINDER TOOLS:
+   - Hunter.io for email formats
+   - Clearbit Connect (Gmail plugin)
+   - Apollo.io for direct contacts
+   
+4. COMMON EMAIL FORMATS:
+   - firstname.lastname@company.com (most common)
+   - firstinitial.lastname@company.com
+   - firstname@company.com (smaller companies)
+
+5. PHONE APPROACH SCRIPT:
+   "Hi, I'm calling about the [position] roles you're hiring for. 
+   I have an AI solution that could handle those tasks automatically. 
+   Who would be the best person to speak with about improving 
+   efficiency in that department?"
+
+
+WARM INTRODUCTION STRATEGIES
+----------------------------
+
+1. MUTUAL CONNECTIONS:
+   - Check LinkedIn for 2nd-degree connections
+   - Join SLC business groups:
+     * Salt Lake Chamber of Commerce
+     * Silicon Slopes
+     * Utah Technology Council
+   
+2. INDUSTRY ASSOCIATIONS:
+   - Healthcare: Utah Hospital Association
+   - Finance: Utah Bankers Association
+   - Tech: Silicon Slopes
+   - Food Service: Utah Restaurant Association
+
+3. LOCAL EVENTS TO ATTEND:
+   - Silicon Slopes Tech Summit
+   - Utah Business Growth Summit
+   - SLC CTO/CIO Roundtables
+   - Industry-specific conferences
+
+
+TRACKING TEMPLATE
+-----------------
+Company: ___________
+Contact Found: Name: ___________ Title: ___________ 
+Email: ___________ LinkedIn: ___________
+Outreach Date: ___________
+Method: [Email/LinkedIn/Phone]
+Response: [Yes/No/Later]
+Next Step: ___________
+Notes: ___________
+
+
+COMPETITIVE INTELLIGENCE
+------------------------
+If targeting a company, research:
+1. Their competitors (who might have same needs)
+2. Their vendors/partners (introduction opportunities)
+3. Recent news (growth = budget, problems = urgency)
+4. Glassdoor reviews (employee complaints = automation opportunities)
+
+
+PRO TIPS:
+---------
+1. Set up Google Alerts for "[Company Name] + hiring"
+2. Follow companies on LinkedIn for real-time updates
+3. Engage with their content before reaching out
+4. Reference specific details from job posting
+5. Connect with 2-3 employees before reaching decision maker
+6. Use TeamBlind or Reddit to find insider pain points
+
+
+RESPONSE TRACKING:
+-----------------
+Expected Response Rates:
+- Cold Email: 5-10%
+- LinkedIn (connected first): 20-30%
+- Warm Introduction: 40-60%
+- After engaging with content: 25-40%
+
+Follow-up Timeline:
+Day 1: Initial outreach
+Day 4: Follow-up #1
+Day 11: Follow-up #2
+Day 25: Final follow-up
+Day 60: Quarterly check-in

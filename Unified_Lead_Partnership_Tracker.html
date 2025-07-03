@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unified Lead & Partnership Tracker</title>
+<style>
+  body{font-family:Arial,sans-serif;margin:20px;background:#263238;color:white;}
+  .container{max-width:1600px;margin:0 auto;}
+  h1{text-align:center;margin-bottom:30px;font-size:32px;}
+  .dashboard-grid{display:grid;grid-template-columns:2fr 3fr;gap:20px;margin-bottom:20px;}
+  .panel{background:white;color:#333;border-radius:10px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,0.3);}
+  h2{margin:0 0 15px 0;color:#0066cc;border-bottom:2px solid #0066cc;padding-bottom:10px;}
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;}
+  .stat-card{background:#f5f5f5;padding:15px;border-radius:8px;text-align:center;}
+  .stat-value{font-size:32px;font-weight:bold;color:#0066cc;}
+  .stat-label{font-size:14px;color:#666;}
+  table{width:100%;border-collapse:collapse;margin-top:15px;}
+  th,td{padding:10px;text-align:left;border-bottom:1px solid #e0e0e0;}
+  th{background:#e3f2fd;font-weight:600;}
+  .lead-type{display:inline-block;padding:4px 12px;border-radius:15px;font-size:12px;font-weight:bold;}
+  .direct{background:#e3f2fd;color:#1976d2;}
+  .partner{background:#f3e5f5;color:#7b1fa2;}
+  .score-badge{display:inline-block;padding:4px 8px;border-radius:4px;font-weight:bold;}
+  .high-score{background:#c8e6c9;color:#2e7d32;}
+  .medium-score{background:#fff9c4;color:#f57c00;}
+  .low-score{background:#ffcdd2;color:#d32f2f;}
+  .platinum{background:#6a1b9a;color:white;}
+  .gold{background:#ffc107;color:white;}
+  .silver{background:#757575;color:white;}
+  .action-buttons{margin-top:10px;}
+  .btn{padding:6px 12px;border:none;border-radius:4px;cursor:pointer;margin-right:5px;text-decoration:none;display:inline-block;}
+  .btn-primary{background:#0066cc;color:white;}
+  .btn-success{background:#4caf50;color:white;}
+  .btn-warning{background:#ff9800;color:white;}
+  .btn:hover{opacity:0.8;}
+  .filter-bar{background:white;color:#333;padding:15px;border-radius:8px;margin-bottom:20px;}
+  .filter-bar select{padding:8px;margin:0 10px;border-radius:4px;border:1px solid #ddd;}
+  .priority-marker{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:5px;}
+  .priority-high{background:#d32f2f;}
+  .priority-medium{background:#f57c00;}
+  .priority-low{background:#388e3c;}
+  .search-input{padding:10px;width:300px;border-radius:4px;border:1px solid #ddd;}
+  .lead-row:hover{background:#f5f5f5;}
+  .total-value{font-size:24px;font-weight:bold;color:#4caf50;text-align:center;margin:20px 0;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎯 Unified Lead & Partnership Tracker</h1>
+
+<div class="filter-bar">
+  <input type="text" class="search-input" id="searchInput" placeholder="Search companies..." onkeyup="filterLeads()">
+  <select id="typeFilter" onchange="filterLeads()">
+    <option value="all">All Types</option>
+    <option value="direct">Direct Opportunities</option>
+    <option value="partner">Partnership Opportunities</option>
+  </select>
+  <select id="scoreFilter" onchange="filterLeads()">
+    <option value="all">All Scores</option>
+    <option value="high">High Priority (70+)</option>
+    <option value="medium">Medium Priority (40-69)</option>
+    <option value="low">Low Priority (<40)</option>
+  </select>
+  <select id="statusFilter" onchange="filterLeads()">
+    <option value="all">All Status</option>
+    <option value="new">New</option>
+    <option value="contacted">Contacted</option>
+    <option value="responded">Responded</option>
+    <option value="meeting">Meeting Scheduled</option>
+  </select>
+</div>
+
+<div class="dashboard-grid">
+<!-- LEFT PANEL: Summary Stats -->
+<div class="panel">
+  <h2>📊 Portfolio Summary</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value" id="totalLeads">0</div>
+      <div class="stat-label">Total Opportunities</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="totalValue">$0</div>
+      <div class="stat-label">Pipeline Value</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="partnerCount">0</div>
+      <div class="stat-label">Partnership Opps</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="multiplierTotal">1x</div>
+      <div class="stat-label">Total Multiplier</div>
+    </div>
+  </div>
+  
+  <h2 style="margin-top:30px;">🏆 Top Partnerships</h2>
+  <div id="topPartnerships">
+    <!-- Will be populated dynamically -->
+  </div>
+  
+  <h2 style="margin-top:30px;">📈 Score Distribution</h2>
+  <canvas id="scoreChart" width="300" height="200"></canvas>
+</div>
+
+<!-- RIGHT PANEL: Lead List -->
+<div class="panel">
+  <h2>🔥 All Opportunities</h2>
+  <table id="leadTable">
+    <thead>
+      <tr>
+        <th>Priority</th>
+        <th>Company</th>
+        <th>Type</th>
+        <th>Score</th>
+        <th>Value</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="leadTableBody">
+      <!-- Sample data - will be replaced by actual data -->
+      <tr class="lead-row">
+        <td><span class="priority-marker priority-high"></span></td>
+        <td><strong>Cafe Rio</strong><br><small>139 AP Clerk positions</small></td>
+        <td><span class="lead-type direct">Direct</span></td>
+        <td><span class="score-badge high-score">85</span></td>
+        <td>$6.9M</td>
+        <td>New</td>
+        <td class="action-buttons">
+          <a href="#" class="btn btn-primary">Contact</a>
+          <a href="#" class="btn btn-success">Score</a>
+        </td>
+      </tr>
+      <tr class="lead-row">
+        <td><span class="priority-marker priority-high"></span></td>
+        <td><strong>Deloitte Consulting</strong><br><small>CRM Implementation Partner</small></td>
+        <td><span class="lead-type partner">Partner</span></td>
+        <td><span class="score-badge platinum">92</span></td>
+        <td>$10M+ (200x)</td>
+        <td>New</td>
+        <td class="action-buttons">
+          <a href="#" class="btn btn-primary">Contact</a>
+          <a href="#" class="btn btn-warning">Partner</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="total-value">
+    Total Pipeline Value: <span id="pipelineTotal">$16.9M+</span>
+  </div>
+</div>
+</div>
+
+<div class="panel" style="margin-top:20px;">
+  <h2>➕ Quick Add New Opportunity</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:15px;">
+    <input type="text" id="quickCompany" placeholder="Company Name">
+    <select id="quickType">
+      <option value="direct">Direct Opportunity</option>
+      <option value="partner">Partnership</option>
+    </select>
+    <input type="number" id="quickScore" placeholder="Score (0-100)" min="0" max="100">
+    <button onclick="quickAddLead()" class="btn btn-success">Add Lead</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+// Initialize with sample data
+let leads = [
+  {
+    id: 1,
+    company: 'Cafe Rio',
+    description: '139 AP Clerk positions',
+    type: 'direct',
+    score: 85,
+    value: 6900000,
+    displayValue: '$6.9M',
+    status: 'new',
+    priority: 'high'
+  },
+  {
+    id: 2,
+    company: 'Deloitte Consulting',
+    description: 'CRM Implementation Partner',
+    type: 'partner',
+    score: 92,
+    value: 10000000,
+    displayValue: '$10M+ (200x)',
+    status: 'new',
+    priority: 'high',
+    partnerTier: 'platinum'
+  },
+  {
+    id: 3,
+    company: 'Valley Behavioral Health',
+    description: 'Healthcare billing automation',
+    type: 'direct',
+    score: 78,
+    value: 200000,
+    displayValue: '$200K',
+    status: 'new',
+    priority: 'high'
+  },
+  {
+    id: 4,
+    company: 'Telarus',
+    description: 'Reporting automation',
+    type: 'direct',
+    score: 72,
+    value: 350000,
+    displayValue: '$350K',
+    status: 'contacted',
+    priority: 'high'
+  },
+  {
+    id: 5,
+    company: 'Local CRM Consultant',
+    description: '10-20 client base',
+    type: 'partner',
+    score: 65,
+    value: 1000000,
+    displayValue: '$1M (10x)',
+    status: 'new',
+    priority: 'medium',
+    partnerTier: 'gold'
+  }
+];
+
+// Load saved data
+const savedLeads = localStorage.getItem('unifiedLeads');
+if (savedLeads) {
+  leads = JSON.parse(savedLeads);
+}
+
+function saveLeads() {
+  localStorage.setItem('unifiedLeads', JSON.stringify(leads));
+}
+
+function updateStats() {
+  const totalLeads = leads.length;
+  const totalValue = leads.reduce((sum, lead) => sum + lead.value, 0);
+  const partnerCount = leads.filter(l => l.type === 'partner').length;
+  const totalMultiplier = leads.filter(l => l.type === 'partner')
+    .reduce((sum, lead) => {
+      const multiplier = lead.partnerTier === 'platinum' ? 50 : 
+                        lead.partnerTier === 'gold' ? 10 : 5;
+      return sum + multiplier;
+    }, 1);
+  
+  document.getElementById('totalLeads').textContent = totalLeads;
+  document.getElementById('totalValue').textContent = '$' + (totalValue / 1000000).toFixed(1) + 'M';
+  document.getElementById('partnerCount').textContent = partnerCount;
+  document.getElementById('multiplierTotal').textContent = totalMultiplier + 'x';
+  
+  // Update top partnerships
+  const topPartners = leads
+    .filter(l => l.type === 'partner')
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+  
+  const topPartnershipsHtml = topPartners.map(p => `
+    <div style="background:#f5f5f5;padding:10px;border-radius:5px;margin:5px 0;">
+      <strong>${p.company}</strong>
+      <span class="score-badge ${p.partnerTier}">${p.partnerTier.toUpperCase()}</span>
+      <div style="font-size:12px;color:#666;">${p.displayValue}</div>
+    </div>
+  `).join('');
+  
+  document.getElementById('topPartnerships').innerHTML = topPartnershipsHtml || '<p>No partnerships yet</p>';
+}
+
+function renderLeads() {
+  const tbody = document.getElementById('leadTableBody');
+  tbody.innerHTML = leads.map(lead => `
+    <tr class="lead-row">
+      <td><span class="priority-marker priority-${lead.priority}"></span></td>
+      <td><strong>${lead.company}</strong><br><small>${lead.description}</small></td>
+      <td><span class="lead-type ${lead.type}">${lead.type === 'partner' ? 'Partner' : 'Direct'}</span></td>
+      <td><span class="score-badge ${getScoreClass(lead)}">${lead.score}</span></td>
+      <td>${lead.displayValue}</td>
+      <td>${lead.status}</td>
+      <td class="action-buttons">
+        <button class="btn btn-primary" onclick="updateStatus(${lead.id})">Update</button>
+        ${lead.type === 'partner' ? 
+          '<button class="btn btn-warning" onclick="viewPartnership(' + lead.id + ')">Details</button>' :
+          '<button class="btn btn-success" onclick="scoreLead(' + lead.id + ')">Score</button>'
+        }
+      </td>
+    </tr>
+  `).join('');
+}
+
+function getScoreClass(lead) {
+  if (lead.type === 'partner') {
+    return lead.partnerTier || 'silver';
+  }
+  return lead.score >= 70 ? 'high-score' : 
+         lead.score >= 40 ? 'medium-score' : 'low-score';
+}
+
+function filterLeads() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const typeFilter = document.getElementById('typeFilter').value;
+  const scoreFilter = document.getElementById('scoreFilter').value;
+  const statusFilter = document.getElementById('statusFilter').value;
+  
+  const filteredLeads = leads.filter(lead => {
+    const matchesSearch = lead.company.toLowerCase().includes(searchTerm) || 
+                         lead.description.toLowerCase().includes(searchTerm);
+    const matchesType = typeFilter === 'all' || lead.type === typeFilter;
+    const matchesScore = scoreFilter === 'all' || 
+                        (scoreFilter === 'high' && lead.score >= 70) ||
+                        (scoreFilter === 'medium' && lead.score >= 40 && lead.score < 70) ||
+                        (scoreFilter === 'low' && lead.score < 40);
+    const matchesStatus = statusFilter === 'all' || lead.status === statusFilter;
+    
+    return matchesSearch && matchesType && matchesScore && matchesStatus;
+  });
+  
+  // Re-render with filtered leads
+  const tbody = document.getElementById('leadTableBody');
+  tbody.innerHTML = filteredLeads.map(lead => `
+    <tr class="lead-row">
+      <td><span class="priority-marker priority-${lead.priority}"></span></td>
+      <td><strong>${lead.company}</strong><br><small>${lead.description}</small></td>
+      <td><span class="lead-type ${lead.type}">${lead.type === 'partner' ? 'Partner' : 'Direct'}</span></td>
+      <td><span class="score-badge ${getScoreClass(lead)}">${lead.score}</span></td>
+      <td>${lead.displayValue}</td>
+      <td>${lead.status}</td>
+      <td class="action-buttons">
+        <button class="btn btn-primary" onclick="updateStatus(${lead.id})">Update</button>
+        ${lead.type === 'partner' ? 
+          '<button class="btn btn-warning" onclick="viewPartnership(' + lead.id + ')">Details</button>' :
+          '<button class="btn btn-success" onclick="scoreLead(' + lead.id + ')">Score</button>'
+        }
+      </td>
+    </tr>
+  `).join('');
+  
+  // Update pipeline total
+  const filteredValue = filteredLeads.reduce((sum, lead) => sum + lead.value, 0);
+  document.getElementById('pipelineTotal').textContent = '$' + (filteredValue / 1000000).toFixed(1) + 'M+';
+}
+
+function quickAddLead() {
+  const company = document.getElementById('quickCompany').value;
+  const type = document.getElementById('quickType').value;
+  const score = parseInt(document.getElementById('quickScore').value) || 0;
+  
+  if (!company) {
+    alert('Please enter a company name');
+    return;
+  }
+  
+  const newLead = {
+    id: Date.now(),
+    company: company,
+    description: type === 'partner' ? 'Potential partner' : 'Direct opportunity',
+    type: type,
+    score: score,
+    value: score * 10000, // Simple calculation
+    displayValue: '$' + (score * 10) + 'K',
+    status: 'new',
+    priority: score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low',
+    partnerTier: type === 'partner' ? (score >= 80 ? 'platinum' : score >= 60 ? 'gold' : 'silver') : null
+  };
+  
+  leads.push(newLead);
+  saveLeads();
+  renderLeads();
+  updateStats();
+  
+  // Clear form
+  document.getElementById('quickCompany').value = '';
+  document.getElementById('quickScore').value = '';
+}
+
+function updateStatus(id) {
+  const statuses = ['new', 'contacted', 'responded', 'meeting', 'proposal', 'won', 'lost'];
+  const lead = leads.find(l => l.id === id);
+  const currentIndex = statuses.indexOf(lead.status);
+  const newStatus = statuses[(currentIndex + 1) % statuses.length];
+  
+  lead.status = newStatus;
+  saveLeads();
+  renderLeads();
+}
+
+// Initialize
+updateStats();
+renderLeads();
+</script>
+</body>
+</html>
