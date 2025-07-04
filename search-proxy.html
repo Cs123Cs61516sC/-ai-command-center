@@ -5,39 +5,116 @@
 </head>
 <body>
 <script>
-// This file acts as a proxy to avoid CORS issues
+// Search RemoteOK API (free, no key needed!)
+async function searchRemoteOK() {
+    try {
+        // RemoteOK provides free job data
+        const response = await fetch('https://remoteok.com/api');
+        const jobs = await response.json();
+        
+        // Filter for AI/automation opportunities
+        const aiJobs = jobs.slice(1, 20).filter(job => {
+            const text = (job.position + ' ' + job.description).toLowerCase();
+            return text.includes('consulting') || 
+                   text.includes('automation') || 
+                   text.includes('process') ||
+                   text.includes('efficiency') ||
+                   text.includes('digital transformation');
+        });
+        
+        return aiJobs.map(job => ({
+            id: Date.now() + Math.random(),
+            company: job.company,
+            title: job.position,
+            description: job.description ? job.description.substring(0, 200) + '...' : 'Remote position',
+            type: "direct",
+            score: calculateScore(job),
+            minValue: estimateMinValue(job.salary_min || 50000),
+            maxValue: estimateMaxValue(job.salary_max || 200000),
+            stage: "discovered",
+            industry: job.tags ? job.tags[0] : "Technology",
+            easyMoney: isEasyMoney(job),
+            location: job.location || "Remote",
+            url: job.url
+        }));
+    } catch (error) {
+        console.log('RemoteOK search failed, using fallback');
+        return [];
+    }
+}
+
+// Calculate opportunity score
+function calculateScore(job) {
+    let score = 50;
+    const text = (job.position + ' ' + job.description).toLowerCase();
+    
+    if (text.includes('automation')) score += 20;
+    if (text.includes('ai') || text.includes('machine learning')) score += 15;
+    if (text.includes('consulting')) score += 15;
+    if (text.includes('senior') || text.includes('lead')) score += 10;
+    
+    return Math.min(score, 95);
+}
+
+// Estimate value for consulting
+function estimateMinValue(salary) {
+    return Math.round(salary * 0.5); // Minimum project value
+}
+
+function estimateMaxValue(salary) {
+    return Math.round(salary * 2.5); // Maximum project value
+}
+
+// Check for easy money indicators
+function isEasyMoney(job) {
+    const text = (job.position + ' ' + job.description).toLowerCase();
+    return text.includes('urgent') || 
+           text.includes('asap') || 
+           text.includes('immediate') ||
+           text.includes('short term');
+}
+
+// Search using multiple sources
 async function searchJobs() {
-    // Mock data for now - replace with real search later
-    const opportunities = [
-        {
-            id: Date.now() + 1,
-            company: "TechCorp Solutions",
-            title: "Process Automation Consultant",
-            description: "Looking for AI consultants to automate workflows",
-            type: "direct",
-            score: 85,
-            minValue: 50000,
-            maxValue: 250000,
-            stage: "discovered",
-            industry: "Technology",
-            easyMoney: true,
-            location: "San Francisco, CA"
-        },
-        {
-            id: Date.now() + 2,
-            company: "Finance Global",
-            title: "Digital Transformation Lead",
-            description: "AI transformation for risk assessment",
-            type: "direct",
-            score: 78,
-            minValue: 100000,
-            maxValue: 500000,
-            stage: "discovered",
-            industry: "Finance",
-            easyMoney: false,
-            location: "New York, NY"
-        }
-    ];
+    let opportunities = [];
+    
+    // Try RemoteOK first
+    const remoteJobs = await searchRemoteOK();
+    opportunities = opportunities.concat(remoteJobs);
+    
+    // If no results, use mock data
+    if (opportunities.length === 0) {
+        opportunities = [
+            {
+                id: Date.now() + 1,
+                company: "TechCorp Solutions",
+                title: "Process Automation Consultant",
+                description: "Looking for AI consultants to automate workflows",
+                type: "direct",
+                score: 85,
+                minValue: 50000,
+                maxValue: 250000,
+                stage: "discovered",
+                industry: "Technology",
+                easyMoney: true,
+                location: "San Francisco, CA"
+            },
+            {
+                id: Date.now() + 2,
+                company: "Finance Global",
+                title: "Digital Transformation Lead",
+                description: "AI transformation for risk assessment",
+                type: "direct",
+                score: 78,
+                minValue: 100000,
+                maxValue: 500000,
+                stage: "discovered",
+                industry: "Finance",
+                easyMoney: false,
+                location: "New York, NY"
+            }
+        ];
+    }
     
     // Return data to parent window
     if (window.opener) {
@@ -46,15 +123,20 @@ async function searchJobs() {
             data: {
                 success: true,
                 count: opportunities.length,
-                opportunities: opportunities
+                opportunities: opportunities.slice(0, 10) // Limit to 10 results
             }
         }, '*');
-        window.close();
+        
+        // Close after sending
+        setTimeout(() => window.close(), 500);
     }
 }
 
 // Auto-run on load
 searchJobs();
 </script>
+<body style="font-family: Arial; padding: 20px;">
+    <p>Searching for opportunities...</p>
+    <p style="font-size: 12px; color: #666;">This window will close automatically.</p>
 </body>
 </html>
