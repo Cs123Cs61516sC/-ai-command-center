@@ -1,5 +1,10 @@
 // REAL Job Search - Works with Indeed's free RSS feed
-const Parser = require('rss-parser');
+import Parser from 'rss-parser';
+
+export const config = {
+  runtime: 'nodejs18.x',
+};
+
 const parser = new Parser();
 
 // Search Indeed via RSS (NO API KEY NEEDED!)
@@ -101,7 +106,7 @@ function estimateValue(job) {
 }
 
 // Main handler for Vercel with PROPER CORS
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // CORS headers - MUST be on EVERY response
   const allowedOrigin = 'https://cs123cs61516sc.github.io';
   
@@ -200,4 +205,4 @@ module.exports = async (req, res) => {
   // Method not allowed
   res.setHeader('Allow', 'GET, POST, OPTIONS');
   return res.status(405).json({ error: 'Method not allowed' });
-};
+}

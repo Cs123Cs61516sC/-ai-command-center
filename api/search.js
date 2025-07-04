@@ -1,7 +1,9 @@
 // Vercel Serverless Function for Job Search
 // Deploy this to Vercel for instant API without managing servers
 
-const axios = require('axios');
+export const config = {
+  runtime: 'nodejs18.x',
+};
 
 // Mock search function for testing
 async function searchJobs(keywords) {
@@ -36,15 +38,13 @@ async function searchJobs(keywords) {
 }
 
 // Vercel serverless function handler
-module.exports = async (req, res) => {
-  // Enable CORS
+export default async function handler(req, res) {
+  // Enable CORS - matching vercel.json
+  const allowedOrigin = 'https://cs123cs61516sc.github.io';
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -84,7 +84,7 @@ module.exports = async (req, res) => {
       message: error.message 
     });
   }
-};
+}
 
 function calculateScore(job) {
   let score = 50;

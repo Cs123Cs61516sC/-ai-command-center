@@ -1,24 +1,26 @@
 {
   "functions": {
-    "api/search.js": {
-      "maxDuration": 30
-    },
-    "api/search-real.js": {
+    "api/*.js": {
       "maxDuration": 30
     }
   },
-  "rewrites": [
+  "headers": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/",
-      "destination": "/public/index.html"
-    },
-    {
-      "source": "/index.html",
-      "destination": "/public/index.html"
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://cs123cs61516sc.github.io"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type"
+        }
+      ]
     }
   ]
 }

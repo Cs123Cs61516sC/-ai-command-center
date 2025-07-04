@@ -9,12 +9,6 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
-    "axios": "^1.6.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "pg": "^8.11.3",
     "rss-parser": "^3.13.0"
   },
   "devDependencies": {
