@@ -1853,29 +1853,18 @@ async function runAutomatedSearch() {
   status.textContent = 'Searching job boards...';
   
   try {
-    // For demo/development - replace with your Vercel URL when deployed
-    const API_BASE = window.location.hostname === 'localhost' 
-      ? 'http://localhost:3000' 
-      : 'https://the-search-seven.vercel.app';
+    // Use popup window to avoid CORS
+    const searchWindow = window.open('search-proxy.html', 'search', 'width=100,height=100');
     
-    const keywords = 'AI consultant, AI implementation, machine learning, automation, digital transformation';
-    
-    const response = await fetch(`${API_BASE}/api/search-simple`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ keywords })
-    });
-    
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    
-    if (data.success && data.opportunities) {
-      status.textContent = 'Processing and scoring opportunities...';
+    // Listen for results
+    const messageHandler = (event) => {
+      if (event.data && event.data.type === 'searchResults') {
+        window.removeEventListener('message', messageHandler);
+        
+        const data = event.data.data;
+        
+        if (data.success && data.opportunities) {
+          status.textContent = 'Processing and scoring opportunities...';
       
       // Convert API results to our format
       const newOpps = data.opportunities.map(opp => ({
@@ -1911,13 +1900,20 @@ async function runAutomatedSearch() {
       
       status.textContent = 'Search complete!';
       const easyMoneyCount = newUnique.filter(o => o.easyMoney).length;
-      showNotification(
-        `Found ${newUnique.length} new opportunities! ${easyMoneyCount > 0 ? `${easyMoneyCount} Easy Money! 🔥` : ''}`, 
-        'success'
-      );
-    } else {
-      throw new Error('No opportunities found');
-    }
+          showNotification(
+            `Found ${newUnique.length} new opportunities! ${easyMoneyCount > 0 ? `${easyMoneyCount} Easy Money! 🔥` : ''}`, 
+            'success'
+          );
+        } else {
+          throw new Error('No opportunities found');
+        }
+        
+        btn.disabled = false;
+        loading.style.display = 'none';
+      }
+    };
+    
+    window.addEventListener('message', messageHandler);
     
   } catch (error) {
     console.error('Search failed:', error);
