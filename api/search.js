@@ -2,7 +2,7 @@
 // Deploy this to Vercel for instant API without managing servers
 
 export const config = {
-  runtime: 'nodejs18.x',
+  runtime: 'nodejs',
 };
 
 // Mock search function for testing

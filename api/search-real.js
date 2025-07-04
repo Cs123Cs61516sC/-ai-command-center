@@ -2,7 +2,7 @@
 import Parser from 'rss-parser';
 
 export const config = {
-  runtime: 'nodejs18.x',
+  runtime: 'nodejs',
 };
 
 const parser = new Parser();
