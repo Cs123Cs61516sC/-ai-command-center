@@ -5,40 +5,51 @@
 </head>
 <body>
 <script>
-// Generate realistic opportunities based on common patterns
+// Generate ALL types of opportunities - both hidden and explicit AI needs
 function generateOpportunities() {
     const companies = [
-        { name: "TechVentures Inc", industry: "Technology", size: "startup" },
-        { name: "Global Systems Corp", industry: "Enterprise Software", size: "enterprise" },
-        { name: "DataFlow Analytics", industry: "Data Science", size: "mid-market" },
-        { name: "CloudFirst Solutions", industry: "Cloud Computing", size: "startup" },
-        { name: "Innovation Labs", industry: "R&D", size: "enterprise" },
-        { name: "Digital Transform Co", industry: "Consulting", size: "mid-market" },
-        { name: "AutomateNow Inc", industry: "Automation", size: "startup" },
-        { name: "FutureScale Systems", industry: "SaaS", size: "mid-market" },
-        { name: "ProcessPro Solutions", industry: "Business Process", size: "enterprise" },
-        { name: "SmartFlow Technologies", industry: "Workflow Automation", size: "startup" }
+        // Companies that DON'T know they need AI (hidden opportunities)
+        { name: "Mountain View Self Storage", industry: "Storage Facilities", size: "small", painPoint: "Manual unit inspections", type: "hidden" },
+        { name: "Rocky Mountain Fitness", industry: "Gym Chain", size: "mid-market", painPoint: "Equipment usage tracking", type: "hidden" },
+        { name: "Wasatch Warehouse Co", industry: "Warehousing", size: "mid-market", painPoint: "Inventory counting errors", type: "hidden" },
+        { name: "Alpine Construction Co", industry: "Construction", size: "mid-market", painPoint: "Job site safety monitoring", type: "hidden" },
+        { name: "Desert Distribution LLC", industry: "Logistics", size: "mid-market", painPoint: "Loading dock efficiency", type: "hidden" },
+        
+        // Companies ACTIVELY seeking AI solutions
+        { name: "TechCorp Solutions", industry: "Technology", size: "enterprise", painPoint: "AI implementation", type: "explicit" },
+        { name: "Global Financial Group", industry: "Finance", size: "enterprise", painPoint: "Risk AI modeling", type: "explicit" },
+        { name: "Healthcare Innovation Labs", industry: "Healthcare Tech", size: "mid-market", painPoint: "Clinical AI systems", type: "explicit" },
+        { name: "Retail Analytics Inc", industry: "Retail Tech", size: "enterprise", painPoint: "Customer behavior AI", type: "explicit" },
+        { name: "Manufacturing 4.0 Corp", industry: "Smart Manufacturing", size: "enterprise", painPoint: "Predictive maintenance AI", type: "explicit" }
     ];
     
     const needs = [
-        { title: "Process Automation Consultant", keywords: ["automation", "efficiency"], easyMoney: true },
-        { title: "Digital Transformation Lead", keywords: ["transformation", "modernization"], easyMoney: false },
-        { title: "AI Implementation Specialist", keywords: ["ai", "machine learning"], easyMoney: false },
-        { title: "Workflow Optimization Expert", keywords: ["workflow", "optimization"], easyMoney: true },
-        { title: "Business Intelligence Consultant", keywords: ["analytics", "insights"], easyMoney: false },
-        { title: "Systems Integration Architect", keywords: ["integration", "architecture"], easyMoney: false },
-        { title: "Efficiency Improvement Analyst", keywords: ["efficiency", "improvement"], easyMoney: true },
-        { title: "Automation Strategy Advisor", keywords: ["strategy", "automation"], easyMoney: false }
+        // Hidden AI opportunities (they don't know they need AI)
+        { title: "Inventory Manager", keywords: ["inventory tracking", "stock management"], hiddenNeed: "AI camera counting", forType: "hidden" },
+        { title: "Operations Manager", keywords: ["process improvement", "efficiency"], hiddenNeed: "Workflow automation", forType: "hidden" },
+        { title: "Quality Control Supervisor", keywords: ["quality assurance", "inspection"], hiddenNeed: "Computer vision QC", forType: "hidden" },
+        { title: "Safety Coordinator", keywords: ["workplace safety", "compliance"], hiddenNeed: "AI safety monitoring", forType: "hidden" },
+        
+        // Explicit AI opportunities (they KNOW they want AI)
+        { title: "AI Implementation Consultant", keywords: ["AI strategy", "implementation"], hiddenNeed: null, forType: "explicit" },
+        { title: "Machine Learning Engineer", keywords: ["ML models", "AI systems"], hiddenNeed: null, forType: "explicit" },
+        { title: "Digital Transformation Lead", keywords: ["AI transformation", "innovation"], hiddenNeed: null, forType: "explicit" },
+        { title: "AI Solutions Architect", keywords: ["AI architecture", "systems design"], hiddenNeed: null, forType: "explicit" }
     ];
     
     const opportunities = [];
     
-    // Generate 5-8 random opportunities
+    // Generate 5-8 random opportunities - mix of sizes
     const count = Math.floor(Math.random() * 4) + 5;
+    
+    // Ensure at least 60% are enterprise deals
+    const enterpriseCount = Math.ceil(count * 0.6);
     
     for (let i = 0; i < count; i++) {
         const company = companies[Math.floor(Math.random() * companies.length)];
-        const need = needs[Math.floor(Math.random() * needs.length)];
+        // Match need type to company type
+        const matchingNeeds = needs.filter(n => n.forType === company.type);
+        const need = matchingNeeds[Math.floor(Math.random() * matchingNeeds.length)];
         
         // Calculate values based on company size
         let minValue, maxValue;
@@ -62,20 +73,26 @@ function generateOpportunities() {
             maxValue = Math.round(maxValue * 0.8);
         }
         
+        const description = company.type === 'hidden' 
+            ? `${company.name} posted for ${need.title} to improve ${need.keywords.join(' and ')}. Hidden opportunity: They need ${need.hiddenNeed} to solve "${company.painPoint}"`
+            : `${company.name} actively seeking ${need.title} for ${need.keywords.join(' and ')}. Direct AI opportunity for ${company.painPoint}`;
+            
         opportunities.push({
             id: Date.now() + Math.random(),
             company: company.name,
             title: need.title,
-            description: `${company.name} is seeking a ${need.title} to help ${need.keywords.join(' and ')} their ${company.industry} operations. ${need.easyMoney ? 'Immediate need for quick implementation.' : 'Strategic long-term engagement.'}`,
+            description: description,
             type: "direct",
             score: 70 + Math.floor(Math.random() * 25),
             minValue: minValue,
             maxValue: maxValue,
             stage: "discovered",
             industry: company.industry,
-            easyMoney: need.easyMoney,
+            easyMoney: company.size === 'small' || company.type === 'explicit',
             location: ["Salt Lake City, UT", "Park City, UT", "Provo, UT", "Lehi, UT", "San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA", "Remote"][Math.floor(Math.random() * 9)],
-            dateAdded: new Date().toISOString()
+            dateAdded: new Date().toISOString(),
+            painPoint: company.painPoint,
+            opportunityType: company.type
         });
     }
     
