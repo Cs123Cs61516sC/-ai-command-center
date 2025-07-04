@@ -44,22 +44,22 @@ function generateOpportunities() {
         let minValue, maxValue;
         switch(company.size) {
             case 'enterprise':
-                minValue = 150000;
-                maxValue = 1000000;
+                minValue = 200000;
+                maxValue = 2000000;
                 break;
             case 'mid-market':
-                minValue = 75000;
-                maxValue = 500000;
+                minValue = 100000;
+                maxValue = 750000;
                 break;
             default: // startup
-                minValue = 25000;
-                maxValue = 150000;
+                minValue = 50000;
+                maxValue = 250000;
         }
         
-        // Adjust for easy money
+        // Adjust for easy money (but keep minimums professional)
         if (need.easyMoney) {
-            minValue = Math.round(minValue * 0.5);
-            maxValue = Math.round(maxValue * 0.7);
+            minValue = Math.max(50000, Math.round(minValue * 0.75));
+            maxValue = Math.round(maxValue * 0.8);
         }
         
         opportunities.push({

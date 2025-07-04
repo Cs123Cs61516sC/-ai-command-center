@@ -95,6 +95,9 @@ body.light-mode {
   display: inline-block;
   margin-left: 5px;
   animation: fire 1s ease-in-out infinite;
+  color: #ff6f00 !important; /* Force orange color for better contrast */
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Add shadow for better readability */
 }
 
 @keyframes fire {
@@ -978,9 +981,9 @@ let opportunities = [
     type: "direct",
     score: 75,
     value: 850000,
-    minValue: 70000, // MVP cost
+    minValue: 25000, // MVP cost updated to $25K minimum
     maxValue: 850000, // Full implementation
-    displayValue: "$70K-$850K",
+    displayValue: "$25K-$850K",
     stage: "qualified",
     industry: "Event Technology",
     guideCreated: true,
@@ -995,9 +998,9 @@ let opportunities = [
     type: "direct",
     score: 72,
     value: 950000,
-    minValue: 85000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 950000,
-    displayValue: "$85K-$950K",
+    displayValue: "$25K-$950K",
     stage: "qualified",
     industry: "Financial Services",
     guideCreated: true,
@@ -1012,9 +1015,9 @@ let opportunities = [
     type: "direct",
     score: 73,
     value: 750000,
-    minValue: 75000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 750000,
-    displayValue: "$75K-$750K",
+    displayValue: "$25K-$750K",
     stage: "qualified",
     industry: "Wealth Management",
     guideCreated: true,
@@ -1029,9 +1032,9 @@ let opportunities = [
     type: "direct",
     score: 73,
     value: 580000,
-    minValue: 45000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 580000,
-    displayValue: "$45K-$580K",
+    displayValue: "$25K-$580K",
     stage: "discovered",
     industry: "Experience Management",
     guideCreated: true,
@@ -1047,9 +1050,9 @@ let opportunities = [
     type: "direct",
     score: 88,
     value: 900000,
-    minValue: 50000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 900000,
-    displayValue: "$50K-$900K",
+    displayValue: "$25K-$900K",
     stage: "contacted",
     industry: "Sales Technology",
     guideCreated: true,
@@ -1065,9 +1068,9 @@ let opportunities = [
     type: "direct",
     score: 70,
     value: 425000,
-    minValue: 35000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 425000,
-    displayValue: "$35K-$425K",
+    displayValue: "$25K-$425K",
     stage: "discovered",
     industry: "Veterinary",
     guideCreated: true,
@@ -1083,9 +1086,9 @@ let opportunities = [
     type: "direct",
     score: 76,
     value: 1100000,
-    minValue: 125000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 1100000,
-    displayValue: "$125K-$1.1M",
+    displayValue: "$25K-$1.1M",
     stage: "qualified",
     industry: "Banking",
     guideCreated: true,
@@ -1100,9 +1103,9 @@ let opportunities = [
     type: "direct",
     score: 77,
     value: 920000,
-    minValue: 95000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 920000,
-    displayValue: "$95K-$920K",
+    displayValue: "$25K-$920K",
     stage: "discovered",
     industry: "Healthcare Technology",
     guideCreated: true,
@@ -1117,9 +1120,9 @@ let opportunities = [
     type: "direct",
     score: 74,
     value: 875000,
-    minValue: 105000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 875000,
-    displayValue: "$105K-$875K",
+    displayValue: "$25K-$875K",
     stage: "discovered",
     industry: "Manufacturing",
     guideCreated: true,
@@ -1134,9 +1137,9 @@ let opportunities = [
     type: "direct",
     score: 75,
     value: 750000,
-    minValue: 95000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 750000,
-    displayValue: "$95K-$750K",
+    displayValue: "$25K-$750K",
     stage: "discovered",
     industry: "Industrial",
     guideCreated: true,
@@ -1151,9 +1154,9 @@ let opportunities = [
     type: "direct",
     score: 80,
     value: 1100000,
-    minValue: 85000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 1100000,
-    displayValue: "$85K-$1.1M",
+    displayValue: "$25K-$1.1M",
     stage: "qualified",
     industry: "Technology",
     guideCreated: true,
@@ -1168,9 +1171,9 @@ let opportunities = [
     type: "partner",
     score: 92,
     value: 10000000,
-    minValue: 50000, // Discovery for Big 4
+    minValue: 25000, // Updated to $25K minimum for Discovery
     maxValue: 10000000,
-    displayValue: "$50K-$10M+",
+    displayValue: "$25K-$10M+",
     stage: "qualified",
     industry: "Professional Services",
     partnerTier: "platinum",
@@ -1187,9 +1190,9 @@ let opportunities = [
     type: "partner",
     score: 90,
     value: 8500000,
-    minValue: 50000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 8500000,
-    displayValue: "$50K-$8.5M",
+    displayValue: "$25K-$8.5M",
     stage: "discovered",
     industry: "Professional Services",
     partnerTier: "platinum",
@@ -1225,9 +1228,9 @@ let opportunities = [
     type: "direct",
     score: 79,
     value: 1350000,
-    minValue: 125000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 1350000,
-    displayValue: "$125K-$1.35M",
+    displayValue: "$25K-$1.35M",
     stage: "discovered",
     industry: "Healthcare Technology",
     guideCreated: true,
@@ -1242,9 +1245,9 @@ let opportunities = [
     type: "direct",
     score: 81,
     value: 1875000,
-    minValue: 150000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 1875000,
-    displayValue: "$150K-$1.875M",
+    displayValue: "$25K-$1.875M",
     stage: "discovered",
     industry: "Enterprise Software",
     guideCreated: true,
@@ -1259,9 +1262,9 @@ let opportunities = [
     type: "direct",
     score: 71,
     value: 475000,
-    minValue: 40000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 475000,
-    displayValue: "$40K-$475K",
+    displayValue: "$25K-$475K",
     stage: "discovered",
     industry: "Human Services",
     guideCreated: true,
@@ -1276,9 +1279,9 @@ let opportunities = [
     type: "partner",
     score: 82,
     value: 2500000,
-    minValue: 35000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 2500000,
-    displayValue: "$35K-$2.5M",
+    displayValue: "$25K-$2.5M",
     stage: "contacted",
     industry: "Professional Services",
     partnerTier: "gold",
@@ -1295,9 +1298,9 @@ let opportunities = [
     type: "direct",
     score: 84,
     value: 1850000,
-    minValue: 140000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 1850000,
-    displayValue: "$140K-$1.85M",
+    displayValue: "$25K-$1.85M",
     stage: "discovered",
     industry: "Wealth Technology",
     guideCreated: true,
@@ -1312,9 +1315,9 @@ let opportunities = [
     type: "direct",
     score: 71,
     value: 680000,
-    minValue: 65000,
+    minValue: 25000, // Updated to $25K minimum
     maxValue: 680000,
-    displayValue: "$65K-$680K",
+    displayValue: "$25K-$680K",
     stage: "qualified",
     industry: "Insurance",
     guideCreated: true,
@@ -2017,14 +2020,17 @@ function generateOutreachScript(opp) {
 
 // Open guide file
 function openGuide(guideUrl) {
+  // Convert forward slashes to backslashes for Windows paths
+  const windowsPath = guideUrl.replace(/\//g, '\\');
+  
   // Show guide path and allow copy for manual opening
-  showNotification('Guide path copied to clipboard!', 'success');
-  navigator.clipboard.writeText(guideUrl).then(() => {
+  navigator.clipboard.writeText(windowsPath).then(() => {
+    showNotification('Guide path copied to clipboard!', 'success');
     // Show the guide modal with more info
-    showGuideModal(guideUrl);
+    showGuideModal(windowsPath);
   }).catch(() => {
     // Fallback if clipboard access fails
-    showGuideModal(guideUrl);
+    showGuideModal(windowsPath);
   });
 }
 
@@ -2040,9 +2046,9 @@ async function showGuideModal(filePath) {
       
       <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin: 20px 0; border: 2px solid #4caf50;">
         <h3 style="color: #2e7d32; margin: 0 0 10px 0;">✅ GUIDE CONFIRMED AVAILABLE</h3>
-        <p><strong>📄 File:</strong> ${fileName}</p>
-        <p><strong>📍 Path:</strong> ${filePath}</p>
-        <p><strong>📊 Status:</strong> Complete AI implementation playbook ready for use</p>
+        <p style="color: #333;"><strong>📄 File:</strong> ${fileName}</p>
+        <p style="color: #333;"><strong>📍 Path:</strong> ${filePath}</p>
+        <p style="color: #333;"><strong>📊 Status:</strong> Complete AI implementation playbook ready for use</p>
       </div>
       
       <div style="background: #fff3e0; padding: 20px; border-radius: 10px; margin: 20px 0; border: 2px solid #ff9800;">
@@ -2092,23 +2098,70 @@ async function showGuideModal(filePath) {
 
 // Open Windows Explorer to the file location
 function openWindowsExplorer(filePath) {
-  const folderPath = filePath.substring(0, filePath.lastIndexOf('/')) || filePath.substring(0, filePath.lastIndexOf('\\'));
-  window.open('file:///' + folderPath, '_blank');
+  try {
+    // Convert to Windows path format
+    const windowsPath = filePath.replace(/\//g, '\\');
+    const folderPath = windowsPath.substring(0, windowsPath.lastIndexOf('\\'));
+    
+    // Copy the folder path to clipboard
+    navigator.clipboard.writeText(folderPath).then(() => {
+      showNotification('Folder path copied! Paste in Windows Explorer address bar', 'success');
+    });
+    
+    // Also try to open the file URL
+    const fileUrl = 'file:///' + filePath.replace(/\\/g, '/');
+    window.open(fileUrl, '_blank');
+  } catch (error) {
+    showNotification('Path copied to clipboard. Paste in File Explorer.', 'info');
+  }
 }
 
 // Copy path again
 function copyPathAgain(filePath) {
-  navigator.clipboard.writeText(filePath).then(() => {
-    showNotification('Path copied to clipboard again!', 'success');
+  // Convert to Windows path format for easier use
+  const windowsPath = filePath.replace(/\//g, '\\');
+  
+  navigator.clipboard.writeText(windowsPath).then(() => {
+    showNotification('Path copied to clipboard! Paste in File Explorer address bar', 'success');
   }).catch(() => {
-    showNotification('Manual copy: ' + filePath, 'info');
+    // Create a temporary textarea for manual copy
+    const textarea = document.createElement('textarea');
+    textarea.value = windowsPath;
+    textarea.style.position = 'absolute';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showNotification('Path copied to clipboard!', 'success');
   });
 }
 
 // Try to open file directly
 function openFileDirectly(filePath) {
-  const fileUrl = 'file:///' + filePath.replace(/\\/g, '/');
-  window.open(fileUrl, '_blank');
+  try {
+    // Try multiple URL formats
+    const fileUrl1 = 'file:///' + filePath.replace(/\\/g, '/');
+    const fileUrl2 = 'file:' + filePath.replace(/\\/g, '/');
+    const fileUrl3 = filePath; // Raw path
+    
+    // Create a link element and click it
+    const link = document.createElement('a');
+    link.href = fileUrl1;
+    link.target = '_blank';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Also copy the path as backup
+    navigator.clipboard.writeText(filePath).then(() => {
+      showNotification('If browser blocked opening, path is copied - paste in address bar!', 'info');
+    });
+  } catch (error) {
+    showNotification('Browser security blocked direct open. Path copied to clipboard!', 'info');
+    navigator.clipboard.writeText(filePath);
+  }
 }
 
 // Download guide as HTML
