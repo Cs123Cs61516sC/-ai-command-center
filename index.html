@@ -452,6 +452,14 @@ body.light-mode .opportunities-table td {
   color: white;
 }
 
+.btn-danger {
+  background: #dc3545;
+  color: white;
+  padding: 6px 10px;
+  font-size: 12px;
+  min-width: auto;
+}
+
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -835,6 +843,7 @@ body.light-mode .deal-card {
             <th>Score</th>
             <th>Value Range</th>
             <th>Stage</th>
+            <th>Date Added</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -976,7 +985,8 @@ let opportunities = [
     industry: "Event Technology",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/RainFocus_Solutions_Consultant_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 2,
@@ -992,7 +1002,8 @@ let opportunities = [
     industry: "Financial Services",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Mountain_America_Credit_Union_CRM_Solutions_Architect_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 3,
@@ -1008,7 +1019,8 @@ let opportunities = [
     industry: "Wealth Management",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/SSC_Salentica_CRM_Solutions_Consultant_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 4,
@@ -1025,7 +1037,8 @@ let opportunities = [
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Red_Pepper_Software_Sr_Technical_Implementation_Consultant_Guide.html",
     easyMoney: true, // Text analytics are straightforward
-    outreachScript: "Hi [Name], I noticed you're implementing Qualtrics XM. Our AI can automate text analytics with plug-and-play simplicity - perfect for a quick win that junior consultants can deploy."
+    outreachScript: "Hi [Name], I noticed you're implementing Qualtrics XM. Our AI can automate text analytics with plug-and-play simplicity - perfect for a quick win that junior consultants can deploy.",
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 5,
@@ -1042,7 +1055,8 @@ let opportunities = [
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Gong_Professional_Services_Consultant_Guide.html",
     easyMoney: true, // AI-ready platform, minimal integration
-    outreachScript: "Gong already has the AI foundation - we just enhance it. This is such an easy implementation that our newest team members handle these projects."
+    outreachScript: "Gong already has the AI foundation - we just enhance it. This is such an easy implementation that our newest team members handle these projects.",
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 6,
@@ -1059,7 +1073,8 @@ let opportunities = [
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Mashura_Veterinary_Implementation_Consultant_Guide.html",
     easyMoney: true, // Small scale, eager adopters
-    outreachScript: "Veterinary practices love simple solutions. Our appointment scheduling AI is so easy to implement that it's perfect for entry-level consultants."
+    outreachScript: "Veterinary practices love simple solutions. Our appointment scheduling AI is so easy to implement that it's perfect for entry-level consultants.",
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 7,
@@ -1075,7 +1090,8 @@ let opportunities = [
     industry: "Banking",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Zions_Bancorp_Salesforce_Solutions_Architect_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 8,
@@ -1091,7 +1107,8 @@ let opportunities = [
     industry: "Healthcare Technology",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/RLDatix_Sales_Engineer_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 9,
@@ -1107,7 +1124,8 @@ let opportunities = [
     industry: "Manufacturing",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Coesia_Flexlink_Sales_Engineer_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 10,
@@ -1123,7 +1141,8 @@ let opportunities = [
     industry: "Industrial",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Fuchs_Lubricants_Sales_Service_Engineer_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 11,
@@ -1158,7 +1177,8 @@ let opportunities = [
     multiplier: 50,
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Deloitte_Dynamics_CRM_Consultant_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 13,
@@ -1176,7 +1196,8 @@ let opportunities = [
     multiplier: 50,
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/PwC_Oracle_Field_Service_Consultant_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 14,
@@ -1194,7 +1215,8 @@ let opportunities = [
     multiplier: 10,
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Protiviti_Adobe_Experience_Senior_Consultant_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 15,
@@ -1210,7 +1232,8 @@ let opportunities = [
     industry: "Healthcare Technology",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Solventum_Implementation_Consultant_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 16,
@@ -1226,7 +1249,8 @@ let opportunities = [
     industry: "Enterprise Software",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Workday_Solution_Consulting_Enablement_Lead_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 17,
@@ -1261,7 +1285,8 @@ let opportunities = [
     multiplier: 20,
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Eide_Bailly_Solutions_Consultant_CRM_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 19,
@@ -1277,7 +1302,8 @@ let opportunities = [
     industry: "Wealth Technology",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Addepar_ADM_Solutions_Consultant_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   },
   {
     id: 20,
@@ -1293,7 +1319,8 @@ let opportunities = [
     industry: "Insurance",
     guideCreated: true,
     guideUrl: "C:/Users/carls/OneDrive/Desktop/Utlyze lead gen program/the leads/claudeTry/Silac_Insurance_Solutions_Architect_Guide.html",
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date('2025-01-03').toISOString()
   }
 ];
 
@@ -1434,6 +1461,7 @@ function renderOpportunities() {
         </div>
       </td>
       <td>${opp.stage}</td>
+      <td>${opp.dateAdded ? new Date(opp.dateAdded).toLocaleDateString() : 'N/A'}</td>
       <td>
         <div class="action-buttons">
           <button class="btn btn-primary" onclick="viewOpportunity(${opp.id})">View</button>
@@ -1442,6 +1470,7 @@ function renderOpportunities() {
             `<button class="btn btn-warning" onclick="generateGuide(${opp.id})">Create</button>`
           }
           <button class="btn btn-contact" onclick="showContactOptions(${opp.id})">Contact</button>
+          <button class="btn btn-danger" onclick="removeOpportunity(${opp.id})" title="Remove opportunity">❌</button>
         </div>
       </td>
     </tr>
@@ -1648,6 +1677,20 @@ function updateOpportunityStage(id) {
   showNotification(`${opp.company} moved to ${nextStage} stage`, 'success');
 }
 
+// Remove opportunity
+function removeOpportunity(id) {
+  const opp = opportunities.find(o => o.id === id);
+  if (!opp) return;
+  
+  if (confirm(`Are you sure you want to remove ${opp.company} from opportunities?`)) {
+    opportunities = opportunities.filter(o => o.id !== id);
+    saveOpportunities();
+    updateDashboard();
+    renderOpportunities();
+    showNotification(`${opp.company} removed from opportunities`, 'info');
+  }
+}
+
 // Drag and drop handlers
 function handleDragOver(e) {
   e.preventDefault();
@@ -1719,7 +1762,8 @@ function extractDataFromHTML(htmlContent, fileName) {
     guideCreated: true,
     guideUrl: fileName,
     guideContent: htmlContent,
-    easyMoney: false
+    easyMoney: false,
+    dateAdded: new Date().toISOString()
   };
   
   // Show stage selection modal
@@ -1883,7 +1927,8 @@ async function runAutomatedSearch() {
         easyMoney: opp.easyMoney || false,
         url: opp.url,
         location: opp.location,
-        outreachScript: generateOutreachScript(opp)
+        outreachScript: generateOutreachScript(opp),
+        dateAdded: opp.dateAdded || new Date().toISOString()
       }));
       
       // Check for duplicates before adding
@@ -1947,7 +1992,8 @@ async function runAutomatedSearch() {
       industry: "Technology",
       guideCreated: false,
       easyMoney: true,
-      outreachScript: "Check browser console for API error details"
+      outreachScript: "Check browser console for API error details",
+      dateAdded: new Date().toISOString()
     };
     
     opportunities.push(demoOpp);

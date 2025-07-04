@@ -74,7 +74,8 @@ function generateOpportunities() {
             stage: "discovered",
             industry: company.industry,
             easyMoney: need.easyMoney,
-            location: ["San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA", "Remote"][Math.floor(Math.random() * 5)]
+            location: ["Salt Lake City, UT", "Park City, UT", "Provo, UT", "Lehi, UT", "San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA", "Remote"][Math.floor(Math.random() * 9)],
+            dateAdded: new Date().toISOString()
         });
     }
     
