@@ -1853,9 +1853,9 @@ async function runAutomatedSearch() {
   status.textContent = 'Searching job boards...';
   
   try {
-    // For demo/development - replace with your Vercel URL when deployed
-    const API_BASE = window.location.hostname === 'localhost' 
-      ? 'http://localhost:3000' 
+    // For demo/development - override API base when not on Vercel
+    const API_BASE = window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
       : 'https://the-search-21oevorjr-carl-stephens-projects.vercel.app';
     
     const keywords = 'AI consultant, AI implementation, machine learning, automation, digital transformation';
@@ -1928,7 +1928,7 @@ async function runAutomatedSearch() {
     
     // Try direct test of API
     console.log('Testing API directly...');
-    fetch('https://the-search-21oevorjr-carl-stephens-projects.vercel.app/api/search-real', {
+    fetch(`${API_BASE}/api/search-real`, {
       method: 'GET'
     }).then(r => r.text()).then(text => {
       console.log('API Response:', text);

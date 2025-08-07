@@ -136,15 +136,23 @@ export default async function handler(req, res) {
   // Handle POST requests
   if (req.method === 'POST') {
     try {
-      // Default search terms for AI opportunities
-      const searchTerms = [
-        'hiring consultant',
-        'process improvement', 
-        'digital transformation',
-        'automation engineer',
-        'efficiency consultant',
-        'systems optimization'
-      ];
+      // Determine search terms from client or fallback defaults
+      const bodyKeywords = (req.body && req.body.keywords) || null;
+      let searchTerms;
+      if (Array.isArray(bodyKeywords)) {
+        searchTerms = bodyKeywords;
+      } else if (typeof bodyKeywords === 'string' && bodyKeywords.trim()) {
+        searchTerms = bodyKeywords.split(',').map(s => s.trim()).filter(Boolean);
+      } else {
+        searchTerms = [
+          'hiring consultant',
+          'process improvement', 
+          'digital transformation',
+          'automation engineer',
+          'efficiency consultant',
+          'systems optimization'
+        ];
+      }
       
       const allOpportunities = [];
       
