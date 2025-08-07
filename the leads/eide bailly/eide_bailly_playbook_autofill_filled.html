@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Consulting Opportunity Playbook – Autofill Edition (v2025‑07‑01)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+  html{font-family:Arial,Helvetica,sans-serif;background:#f7f9fc;color:#222;line-height:1.55;}
+  body{margin:0;padding:2rem 2.5rem;max-width:1100px;margin-inline:auto;}
+  h1,h2,h3{margin:0 0 .7rem;font-weight:600;color:#0d3c61;}
+  h1{font-size:2rem;margin-bottom:1.4rem;}
+  h2{font-size:1.3rem;margin-top:1.7rem;border-bottom:2px solid #0d3c61;padding-bottom:.3rem;}
+  table{width:100%;border-collapse:collapse;margin:.9rem 0;}
+  th,td{padding:.55rem .45rem;text-align:left;border-bottom:1px solid #ddd;vertical-align:top;}
+  th{background:#e8f1fb;color:#0d3c61;font-weight:600;}
+  ul{margin:.4rem 0 .8rem 1.2rem;padding:0;}
+  li{margin:.25rem 0;}
+  code{background:#f0f4ff;padding:.15rem .3rem;border-radius:4px;}
+  .est{background:#fffbe7;}
+  .warn{background:#ffe5e5;color:#b30000;font-weight:600;}
+  .missing{background:#ffe5e5;color:#b30000;font-weight:600;}
+  .banner{display:none;background:#ffe5e5;color:#b30000;padding:.6rem 1rem;margin-bottom:1rem;border-left:4px solid #b30000;}
+  .banner.show{display:block;}
+  footer{font-size:.85rem;color:#555;margin-top:3rem;border-top:1px solid #ccc;padding-top:1rem;}
+  a{color:#0d3c61;text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  #loader{display:none;margin-left:.5rem;}
+</style>
+</head>
+<body>
+<script>
+window.companyData = {
+  "meta.companyName": "Eide Bailly LLP",
+  "name": "Eide Bailly LLP",
+  "industry": "Accounting & Business Advisory",
+  "location": "Fargo, ND (HQ) · Salt Lake City, UT job site",
+  "website": "https://www.eidebailly.com",
+  "posted_role": "Solutions Consultant – CRM",
+  "posted_role_short": "CRM Solutions Bot",
+  "salary_low": 135000,
+  "salary_high": 170000,
+  "benefits_percent": 30,
+  "primary_pain_points": [
+    "Fragmented CRM & ERP data across 40+ offices",
+    "Manual lead and opportunity entry eats billable hours",
+    "Low Salesforce adoption hampers pipeline visibility"
+  ],
+  "desired_outcomes": [
+    "Unified 360° client view across tax, audit & advisory",
+    "Automated data sync between CRM, GL and marketing platforms",
+    "AI‑generated next‑best‑action and cross‑sell insights",
+    "Self‑service KPI dashboards for partners"
+  ],
+  "brody_finding": "Budget range (135–170 k) suggests appetite for transformative tooling; quick‑win automation could unlock ≥$500 k additional billables.",
+  "karen_finding": "CPA firm must maintain SOC‑2 & tax‑payer privacy; ensure AI agents log and redact sensitive PII.",
+  "kevin_finding": "Job post cites 'seamless integration' yet firm runs siloed systems (Salesforce, Intacct); verify data contracts & licensing conflicts.",
+  "pinko_finding": "Peers like RSM & Grant Thornton rolling out AI‑driven CRMs — speed to deployment is competitive risk factor.",
+  "consult_with_mgr": true,
+  "calc.lea.hours": 60,
+  "calc.lea.capex": "$7,200",
+  "calc.lea.ttl": "3 weeks",
+  "calc.lea.upside": "$40 k+",
+  "calc.lea.roi": "5.6×",
+  "calc.core.hours": 240,
+  "calc.core.capex": "$28,800",
+  "calc.core.ttl": "10 weeks",
+  "calc.core.upside": "$180 k+",
+  "calc.core.roi": "6.3×",
+  "calc.full.hours": 480,
+  "calc.full.capex": "$57,600",
+  "calc.full.ttl": "16 weeks",
+  "calc.full.upside": "$500 k+",
+  "calc.full.roi": "8.7×",
+  "costComp.salary": "$152,500",
+  "costComp.benefits": "$45,750",
+  "costComp.ai": "$60,000"
+};
+</script>
+
+
+<!-- TOP INPUT BAR -->
+<div style="margin-bottom:1rem;background:#e8f1fb;padding:1rem;border-radius:6px;">
+  <label for="jobURL"><strong>Paste Job‑Posting URL:</strong></label>
+  <input id="jobURL" placeholder="https://..." style="width:60%;max-width:500px;margin-inline:.6rem .4rem;">
+  <button id="loadBtn">Load & Autofill</button>
+  <span id="loader">⏳ Parsing…</span>
+  <span id="loadMsg" style="margin-left:.6rem;color:#b30000;"></span>
+</div>
+
+<aside id="alertBanner" class="banner">⚠ Action required: One or more items exceed the allowed estimate range or lack reliable data. Review the red‑highlighted cells before distribution.</aside>
+
+<h1>AI Consulting Opportunity Playbook – <span data-field="meta.companyName"></span></h1>
+<p><strong>Purpose:</strong> Single, drop‑in framework to vet prospects, craft ROI‑driven road‑maps, price work and generate a polished Executive Brief — all in one file.</p>
+
+<!-- 0 | Quick‑Start Workflow -->
+<h2>0 | Quick‑Start Workflow</h2>
+<ol>
+  <li><strong>Job‑Posting Harvest:</strong> Paste the URL above; the doc autopopulates.</li>
+  <li><strong>Background & Vetting Pass:</strong> Complete Section&nbsp;1 with Brody/Kevin/Karen/Pinko lenses.</li>
+  <li><strong>Eight‑Step Opportunity Scan:</strong> Fill Section&nbsp;2 matrix for high‑ROI automations.</li>
+  <li><strong>ROI Ladder + Cost Calc:</strong> Use Section&nbsp;3 to quantify Lean vs. Full build.</li>
+  <li><strong>Engagement Timeline & Pricing:</strong> Select consult tier ($7 K solo / $10 K w/ BD) & outline 45‑day MVP.</li>
+  <li><strong>Draft Executive Brief:</strong> Copy Section&nbsp;5 template, replace braces.</li>
+  <li><strong>Send Pack to Management:</strong> Email brief + pricing, open dialogue.</li>
+</ol>
+
+<!-- 1 | Company Vetting Snapshot -->
+<h2>1 | Company Vetting Snapshot</h2>
+<table>
+<thead><tr><th>Perspective</th><th>Key Findings</th><th>Controls / Notes</th></tr></thead>
+<tbody>
+<tr><td>Profit / Execution (Brody)</td><td><span data-field="vet.brody.findings"></span></td><td><span data-field="vet.brody.controls"></span></td></tr>
+<tr><td>Logic Integrity (Kevin)</td><td><span data-field="vet.kevin.findings"></span></td><td><span data-field="vet.kevin.controls"></span></td></tr>
+<tr><td>Compliance (Karen)</td><td><span data-field="vet.karen.findings"></span></td><td><span data-field="vet.karen.controls"></span></td></tr>
+<tr><td>Litigation Exposure (Pinko)</td><td><span data-field="vet.pinko.findings"></span></td><td><span data-field="vet.pinko.controls"></span></td></tr>
+</tbody>
+</table>
+
+<!-- 2 | Eight‑Step Opportunity Scan -->
+<h2>2 | Eight‑Step Opportunity Scan</h2>
+<ol>
+<li>Rapid Public‑Data Sweep</li>
+<li>Multi‑Pass Deep Dive (Reg, Digital Footprint, Channel, etc.)</li>
+<li>Pain‑Point Validation (Known vs. Hidden)</li>
+<li>Lead‑Type Mapping</li>
+<li>Solution Catalogue (Impact / Effort / Fit)</li>
+<li>Financial Modeling (Lean vs. Full)</li>
+<li>Integration Audit</li>
+<li>Decision Gates & Road‑map</li>
+</ol>
+<table>
+<thead><tr><th>Module</th><th>Main AI Functionality</th><th>Key APIs / Data</th><th>KPI Impact</th></tr></thead>
+<tbody>
+<tr><td>Smart Intake</td><td>LLM tags inbound lead intent</td><td>GA4, Meta, CRM</td><td>CAC ↓ %</td></tr>
+<tr><td>Auto‑Take‑Off Lite</td><td>CV + GPT builds BOM</td><td>Imagery API</td><td>Estimator hrs ↓</td></tr>
+</tbody>
+</table>
+
+<!-- 3 | ROI Ladder & Cost Calculator -->
+<h2>3 | ROI Ladder & Cost Calculator</h2>
+<h3>3.1 Lean‑to‑Full Road‑Map</h3>
+<table>
+<thead><tr><th>Phase</th><th>Scope</th><th>Est. Build Hours</th><th>Cap‑Ex</th><th>TTL</th><th>Year‑1 Upside</th><th>ROI ×</th></tr></thead>
+<tbody>
+<tr><td>Phase A – Quick Win</td><td>Single workflow automation</td><td><span data-field="calc.lea.hours"></span></td><td><span data-field="calc.lea.capex"></span></td><td><span data-field="calc.lea.ttl"></span></td><td><span data-field="calc.lea.upside"></span></td><td><span data-field="calc.lea.roi"></span></td></tr>
+<tr><td>Phase B – Core System</td><td>Two‑to‑three modules</td><td><span data-field="calc.core.hours"></span></td><td><span data-field="calc.core.capex"></span></td><td><span data-field="calc.core.ttl"></span></td><td><span data-field="calc.core.upside"></span></td><td><span data-field="calc.core.roi"></span></td></tr>
+<tr><td>Phase C – Full Takeover</td><td>End‑to‑end + ML</td><td><span data-field="calc.full.hours"></span></td><td><span data-field="calc.full.capex"></span></td><td><span data-field="calc.full.ttl"></span></td><td><span data-field="calc.full.upside"></span></td><td><span data-field="calc.full.roi"></span></td></tr>
+</tbody>
+</table>
+<p><em>Cap‑Ex calc:</em> EstHrs × $600 / 10 × 2 (margin) — remains ≈20 % cheaper than traditional dev.</p>
+
+<h3>3.2 Employee vs. AI Cost</h3>
+<table>
+<thead><tr><th></th><th>Traditional Hire</th><th>Our AI Solution</th></tr></thead>
+<tbody>
+<tr><td>Annual Salary / Fees</td><td><span data-field="costComp.salary"></span></td><td><span data-field="costComp.ai"></span></td></tr>
+<tr><td>Benefits & Taxes (+30 %)</td><td><span data-field="costComp.benefits"></span></td><td>—</td></tr>
+<tr><td>On‑boarding, Tools</td><td><span data-field

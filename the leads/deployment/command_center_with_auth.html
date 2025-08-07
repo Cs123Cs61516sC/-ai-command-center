@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Utlyze Command Center</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        /* Login Screen */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-box h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .login-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .login-box button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .login-box button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Main Dashboard */
+        .dashboard {
+            display: none;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .user-email {
+            color: #666;
+        }
+        
+        .logout-btn {
+            padding: 8px 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .logout-btn:hover {
+            background: #c82333;
+        }
+        
+        /* Dashboard Content */
+        .dashboard-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Data Table */
+        .data-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .data-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .stage-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .stage-discovered { background: #e3f2fd; color: #1976d2; }
+        .stage-contacted { background: #fff3e0; color: #f57c00; }
+        .stage-responded { background: #e8f5e9; color: #388e3c; }
+        
+        /* Add Forms */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+        }
+        
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .modal-content input, .modal-content select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .modal-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .save-btn {
+            background: #28a745;
+            color: white;
+        }
+        
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #667eea;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-box">
+            <h1>🚀 Utlyze Command Center</h1>
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+            
+            <input type="email" id="emailInput" placeholder="Email" value="">
+            <input type="password" id="passwordInput" placeholder="Password" value="">
+            
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+    
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <div class="header">
+            <div class="header-content">
+                <h1>Utlyze Lead Generation System</h1>
+                <div class="user-info">
+                    <span class="user-email" id="userEmail"></span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Companies</h3>
+                    <div class="stat-value" id="totalCompanies">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Opportunities</h3>
+                    <div class="stat-value" id="totalOpportunities">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Follow-ups</h3>
+                    <div class="stat-value" id="pendingFollowups">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Response Rate</h3>
+                    <div class="stat-value" id="responseRate">0%</div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn" onclick="showAddCompanyModal()">➕ Add Company</button>
+                <button class="action-btn" onclick="showAddOpportunityModal()">📋 Add Opportunity</button>
+                <button class="action-btn" onclick="refreshData()">🔄 Refresh Data</button>
+                <button class="action-btn" onclick="runScraper()">🔍 Run Scraper</button>
+            </div>
+            
+            <!-- Opportunities Table -->
+            <div class="data-section">
+                <h2>Recent Opportunities</h2>
+                <div id="opportunitiesTable">
+                    <div class="loading">Loading opportunities...</div>
+                </div>
+            </div>
+            
+            <!-- Companies Table -->
+            <div class="data-section">
+                <h2>Companies</h2>
+                <div id="companiesTable">
+                    <div class="loading">Loading companies...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Company Modal -->
+    <div id="addCompanyModal" class="modal">
+        <div class="modal-content">
+            <h2>Add New Company</h2>
+            <input type="text" id="newCompanyName" placeholder="Company Name">
+            <input type="text" id="newCompanyDomain" placeholder="Domain (e.g., company.com)">
+            <input type="text" id="newCompanyIndustry" placeholder="Industry">
+            <input type="text" id="newCompanySize" placeholder="Size (e.g., 100-500)">
+            <input type="text" id="newCompanyLocation" placeholder="Location">
+            
+            <div class="modal-buttons">
+                <button class="cancel-btn" onclick="closeModal('addCompanyModal')">Cancel</button>
+                <button class="save-btn" onclick="saveCompany()">Save Company</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Opportunity Modal -->
+    <div id="addOpportunityModal" class="modal">
+        <div class="modal-content">
+            <h2>Add New Opportunity</h2>
+            <select id="newOppCompany">
+                <option value="">Select Company...</option>
+            </select>
+            <input type="text" id="newOppTitle" placeholder="Job Title">
+            <input type="text" id="newOppUrl" placeholder="Job URL">
+            <input type="text" id="newOppSource" placeholder="Source (indeed, linkedin, etc)">
+            <input type="number" id="newOppScore" placeholder="Score (0-100)" min="0" max="100">
+            
+            <div class="modal-buttons">
+                <button class="cancel-btn" onclick="closeModal('addOpportunityModal')">Cancel</button>
+                <button class="save-btn" onclick="saveOpportunity()">Save Opportunity</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize Supabase - YOU NEED TO UPDATE THESE
+        const SUPABASE_URL = localStorage.getItem('supabaseUrl') || 'YOUR_SUPABASE_URL';
+        const SUPABASE_KEY = localStorage.getItem('supabaseKey') || 'YOUR_PUBLISHABLE_KEY';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        // Check if user is already logged in
+        window.onload = async function() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                showDashboard(session.user);
+            }
+        };
+        
+        // Login function
+        async function login() {
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passwordInput').value;
+            
+            if (!email || !password) {
+                showError('Please enter email and password');
+                return;
+            }
+            
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+                
+                if (error) throw error;
+                
+                showSuccess('Login successful!');
+                setTimeout(() => {
+                    showDashboard(data.user);
+                }, 500);
+                
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+        
+        // Logout function
+        async function logout() {
+            await supabase.auth.signOut();
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('emailInput').value = '';
+            document.getElementById('passwordInput').value = '';
+        }
+        
+        // Show dashboard
+        async function showDashboard(user) {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            document.getElementById('userEmail').textContent = user.email;
+            
+            // Load data
+            await refreshData();
+        }
+        
+        // Refresh all data
+        async function refreshData() {
+            await loadCompanies();
+            await loadOpportunities();
+            await updateStats();
+        }
+        
+        // Load companies
+        async function loadCompanies() {
+            try {
+                const { data, error } = await supabase
+                    .from('companies')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                
+                if (error) throw error;
+                
+                displayCompanies(data);
+                
+                // Update company dropdown
+                const select = document.getElementById('newOppCompany');
+                select.innerHTML = '<option value="">Select Company...</option>';
+                data.forEach(company => {
+                    select.innerHTML += `<option value="${company.id}">${company.name}</option>`;
+                });
+                
+            } catch (error) {
+                console.error('Error loading companies:', error);
+            }
+        }
+        
+        // Load opportunities
+        async function loadOpportunities() {
+            try {
+                const { data, error } = await supabase
+                    .from('opportunities')
+                    .select(`
+                        *,
+                        companies (name, domain)
+                    `)
+                    .order('score', { ascending: false });
+                
+                if (error) throw error;
+                
+                displayOpportunities(data);
+                
+            } catch (error) {
+                console.error('Error loading opportunities:', error);
+            }
+        }
+        
+        // Update stats
+        async function updateStats() {
+            try {
+                // Get companies count
+                const { count: companyCount } = await supabase
+                    .from('companies')
+                    .select('*', { count: 'exact', head: true });
+                
+                // Get opportunities count
+                const { count: oppCount } = await supabase
+                    .from('opportunities')
+                    .select('*', { count: 'exact', head: true });
+                
+                // Get pending reminders count
+                const { count: reminderCount } = await supabase
+                    .from('reminders')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('completed', false);
+                
+                // Get response rate
+                const { data: outreachData } = await supabase
+                    .from('outreach')
+                    .select('replied_at');
+                
+                const responseRate = outreachData && outreachData.length > 0
+                    ? Math.round((outreachData.filter(o => o.replied_at).length / outreachData.length) * 100)
+                    : 0;
+                
+                // Update UI
+                document.getElementById('totalCompanies').textContent = companyCount || 0;
+                document.getElementById('totalOpportunities').textContent = oppCount || 0;
+                document.getElementById('pendingFollowups').textContent = reminderCount || 0;
+                document.getElementById('responseRate').textContent = `${responseRate}%`;
+                
+            } catch (error) {
+                console.error('Error updating stats:', error);
+            }
+        }
+        
+        // Display companies
+        function displayCompanies(companies) {
+            if (!companies || companies.length === 0) {
+                document.getElementById('companiesTable').innerHTML = '<p>No companies yet. Add one above!</p>';
+                return;
+            }
+            
+            let html = '<table>';
+            html += '<tr><th>Company</th><th>Domain</th><th>Industry</th><th>Size</th><th>Location</th></tr>';
+            
+            companies.forEach(company => {
+                html += `<tr>
+                    <td><strong>${company.name}</strong></td>
+                    <td>${company.domain || '-'}</td>
+                    <td>${company.industry || '-'}</td>
+                    <td>${company.size || '-'}</td>
+                    <td>${company.location || '-'}</td>
+                </tr>`;
+            });
+            
+            html += '</table>';
+            document.getElementById('companiesTable').innerHTML = html;
+        }
+        
+        // Display opportunities
+        function displayOpportunities(opportunities) {
+            if (!opportunities || opportunities.length === 0) {
+                document.getElementById('opportunitiesTable').innerHTML = '<p>No opportunities yet. Add one or run the scraper!</p>';
+                return;
+            }
+            
+            let html = '<table>';
+            html += '<tr><th>Company</th><th>Job Title</th><th>Score</th><th>Stage</th><th>Value Range</th><th>Source</th></tr>';
+            
+            opportunities.forEach(opp => {
+                const stageBadgeClass = `stage-${opp.stage}`;
+                const valueRange = opp.value_min && opp.value_max 
+                    ? `$${(opp.value_min/1000).toFixed(0)}k-$${(opp.value_max/1000).toFixed(0)}k`
+                    : '-';
+                
+                html += `<tr>
+                    <td><strong>${opp.companies?.name || 'Unknown'}</strong></td>
+                    <td>${opp.job_title}</td>
+                    <td>${opp.score || 0}</td>
+                    <td><span class="stage-badge ${stageBadgeClass}">${opp.stage}</span></td>
+                    <td>${valueRange}</td>
+                    <td>${opp.source || '-'}</td>
+                </tr>`;
+            });
+            
+            html += '</table>';
+            document.getElementById('opportunitiesTable').innerHTML = html;
+        }
+        
+        // Modal functions
+        function showAddCompanyModal() {
+            document.getElementById('addCompanyModal').style.display = 'flex';
+        }
+        
+        function showAddOpportunityModal() {
+            document.getElementById('addOpportunityModal').style.display = 'flex';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Save company
+        async function saveCompany() {
+            const name = document.getElementById('newCompanyName').value;
+            const domain = document.getElementById('newCompanyDomain').value;
+            const industry = document.getElementById('newCompanyIndustry').value;
+            const size = document.getElementById('newCompanySize').value;
+            const location = document.getElementById('newCompanyLocation').value;
+            
+            if (!name) {
+                alert('Company name is required');
+                return;
+            }
+            
+            try {
+                const { error } = await supabase
+                    .from('companies')
+                    .insert([{
+                        name: name,
+                        domain: domain,
+                        industry: industry,
+                        size: size,
+                        location: location
+                    }]);
+                
+                if (error) throw error;
+                
+                closeModal('addCompanyModal');
+                refreshData();
+                
+                // Clear form
+                document.getElementById('newCompanyName').value = '';
+                document.getElementById('newCompanyDomain').value = '';
+                document.getElementById('newCompanyIndustry').value = '';
+                document.getElementById('newCompanySize').value = '';
+                document.getElementById('newCompanyLocation').value = '';
+                
+            } catch (error) {
+                alert('Error saving company: ' + error.message);
+            }
+        }
+        
+        // Save opportunity
+        async function saveOpportunity() {
+            const companyId = document.getElementById('newOppCompany').value;
+            const title = document.getElementById('newOppTitle').value;
+            const url = document.getElementById('newOppUrl').value;
+            const source = document.getElementById('newOppSource').value;
+            const score = document.getElementById('newOppScore').value;
+            
+            if (!companyId || !title) {
+                alert('Company and job title are required');
+                return;
+            }
+            
+            try {
+                const { error } = await supabase
+                    .from('opportunities')
+                    .insert([{
+                        company_id: parseInt(companyId),
+                        job_title: title,
+                        job_url: url,
+                        source: source || 'manual',
+                        score: parseInt(score) || 50,
+                        stage: 'discovered',
+                        value_min: 100000,
+                        value_max: 200000
+                    }]);
+                
+                if (error) throw error;
+                
+                closeModal('addOpportunityModal');
+                refreshData();
+                
+                // Clear form
+                document.getElementById('newOppCompany').value = '';
+                document.getElementById('newOppTitle').value = '';
+                document.getElementById('newOppUrl').value = '';
+                document.getElementById('newOppSource').value = '';
+                document.getElementById('newOppScore').value = '';
+                
+            } catch (error) {
+                alert('Error saving opportunity: ' + error.message);
+            }
+        }
+        
+        // Run scraper (placeholder)
+        function runScraper() {
+            alert('Scraper functionality coming soon! This will pull jobs from Indeed/LinkedIn.');
+        }
+        
+        // Helper functions
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Handle Enter key on login
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('loginContainer').style.display !== 'none') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>

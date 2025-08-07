@@ -1,0 +1,135 @@
+<!--
+  AI Consulting Opportunity Playbook – Single‑Source Template
+  Version: v17.0.0
+  TEMPLATE_ID: PLAYBOOK_V17_0
+  Release date: 2025‑07‑02
+  CHANGE LOG:
+    • One and only template – delete every older copy (v4, v10, v16…)
+    • No legacy ROI include, no silent fallback paths
+    • ROI_TABLE=v17 flag required by build script
+    • All tokens must be provided or build must fail
+    • Added fixed filename hint: rainfocus_playbook.html (can override in builder)
+  REQUIRE: ROI_TABLE=v17
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>[[Project Title]] – AI Consulting Opportunity Playbook</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:40px;line-height:1.45;color:#222}
+    table{width:100%;border-collapse:collapse;margin:1.2em 0}
+    th,td{border:1px solid #ccc;padding:6px;text-align:left}
+    th{background:#f4f4f4}
+    header,footer{text-align:center;margin:0 0 2em}
+    h1{margin:0 0 .3em;font-size:1.9em}
+    h2{margin-top:1.7em;font-size:1.45em;border-bottom:2px solid #eee;padding-bottom:.35em}
+    h3{margin-top:1.1em;font-size:1.25em}
+    a{color:#0366d6;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .warn{color:#c00;font-weight:bold}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>[[Project Title]] – AI Consulting Opportunity Playbook (v17)</h1>
+    <p>Prepared for [[Client Name]] • [[Date Prepared]]</p>
+  </header>
+
+  <!-- 1 EXEC SUMMARY -->
+  <section id="executive-summary">
+    <h2>1. Executive Summary</h2>
+    <p>[[Executive Summary Text]]</p>
+  </section>
+
+  <!-- 2 CURRENT STATE -->
+  <section id="current-state">
+    <h2>2. Current State &amp; Pain Points</h2>
+    <ul>
+      <li>[[Pain Point 1]]</li>
+      <li>[[Pain Point 2]]</li>
+      <li>[[Pain Point 3]]</li>
+    </ul>
+  </section>
+
+  <!-- 3 SOLUTION OVERVIEW -->
+  <section id="solution-overview">
+    <h2>3. Solution Overview</h2>
+    <p>[[Solution Overview Text]]</p>
+  </section>
+
+  <!-- 4 ROI & ROADMAP -->
+  <section id="roi">
+    <h2>4. ROI &amp; Road‑Map</h2>
+
+    <!-- 4.1 Lean-to-Full Table -->
+    <h3>4.1 Lean‑to‑Full Road‑Map</h3>
+    <table>
+      <thead>
+        <tr><th>Phase</th><th>Scope</th><th>Hrs (AI)</th><th>Hrs (FTE)</th><th>Cap‑Ex</th><th>Op‑Ex</th><th>Annual Benefit</th><th>Payback (mo)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Quick Win</td><td>[[LeanScope]]</td><td>[[LeanHrsAI]]</td><td>[[LeanHrsFTE]]</td><td>[[LeanCapEx]]</td><td>[[LeanOpEx]]</td><td>[[LeanBenefit]]</td><td>[[LeanPayback]]</td></tr>
+        <tr><td>Core System</td><td>[[CoreScope]]</td><td>[[CoreHrsAI]]</td><td>[[CoreHrsFTE]]</td><td>[[CoreCapEx]]</td><td>[[CoreOpEx]]</td><td>[[CoreBenefit]]</td><td>[[CorePayback]]</td></tr>
+        <tr><td>Full Platform</td><td>[[FullScope]]</td><td>[[FullHrsAI]]</td><td>[[FullHrsFTE]]</td><td>[[FullCapEx]]</td><td>[[FullOpEx]]</td><td>[[FullBenefit]]</td><td>[[FullPayback]]</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 4.2 Employee vs AI Cost -->
+    <h3>4.2 Employee vs AI Cost Comparison</h3>
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Human FTE</th><th>AI Solution</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Annual cost</td><td>[[FTEAnnualCost]]</td><td>[[AIAnnualCost]]</td></tr>
+        <tr><td>Monthly cost</td><td>[[FTEMonthlyCost]]</td><td>[[AIMonthlyCost]]</td></tr>
+        <tr><td>Output per month</td><td>[[FTEOutput]]</td><td>[[AIOutput]]</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 4.3 Tax Reference -->
+    <h3>4.3 Cap‑Ex / Tax Write‑Off Reference</h3>
+    <table>
+      <thead>
+        <tr><th>Spend Category</th><th>Tax Treatment</th><th>Time Horizon</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Software development</td><td>[[CapExTreatment]]</td><td>[[CapExHorizon]]</td></tr>
+        <tr><td>Subscription / licenses</td><td>[[OpExTreatment]]</td><td>[[OpExHorizon]]</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5 IMPLEMENTATION -->
+  <section id="implementation-plan">
+    <h2>5. Implementation Plan</h2>
+    <ol>
+      <li>[[Step1]]</li>
+      <li>[[Step2]]</li>
+      <li>[[Step3]]</li>
+    </ol>
+  </section>
+
+  <!-- 6 NEXT STEPS -->
+  <section id="next-steps">
+    <h2>6. Next Steps</h2>
+    <p>[[NextStepsText]]</p>
+  </section>
+
+  <!-- 7 REFERENCE LINKS -->
+  <section id="reference-links">
+    <h2>7. Reference Links</h2>
+    <ul>
+      <li><a href="[[JobPostingURL]]" target="_blank">Apply for the role</a></li>
+      <li><a href="[[CompanyLinkedInURL]]" target="_blank">[[Company Name]] on LinkedIn</a></li>
+      <li><a href="[[RecruiterLinkedInURL]]" target="_blank">Connect with recruiter</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>© [[Year]] [[Consulting Firm Name]]. Rev. v17.0.0 • TEMPLATE_ID: PLAYBOOK_V17_0</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SolutionStream AI Revenue Enhancement</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0a0e27;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Slide Container */
+.slide {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.slide-content {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Typography */
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #00ff41 0%, #00ccff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: #00ccff;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffaa00;
+}
+
+p {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: #e0e0e0;
+}
+
+/* Animations */
+@keyframes glow {
+  from { text-shadow: 0 0 20px #00ff41; }
+  to { text-shadow: 0 0 30px #00ff41, 0 0 40px #00ccff; }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-in {
+  animation: slideIn 0.8s ease-out;
+}
+
+/* Special Elements */
+.huge-number {
+  font-size: 8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffaa00 0%, #ff4444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 2rem 0;
+  animation: pulse 2s infinite;
+}
+
+.opportunity-card {
+  background: linear-gradient(135deg, #1a2a3a 0%, #2a3a4a 100%);
+  border: 2px solid #00ff41;
+  border-radius: 20px;
+  padding: 3rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 20px 40px rgba(0,255,65,0.3);
+  transform: perspective(1000px) rotateX(5deg);
+  transition: all 0.3s ease;
+}
+
+.opportunity-card:hover {
+  transform: perspective(1000px) rotateX(0deg) scale(1.05);
+  box-shadow: 0 30px 60px rgba(0,255,65,0.5);
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.metric-box {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.metric-box:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.metric-value {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #00ff41;
+}
+
+.metric-label {
+  font-size: 1.2rem;
+  color: #999;
+  margin-top: 0.5rem;
+}
+
+/* Trojan Horse Section */
+.trojan-section {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+  border-radius: 20px;
+  padding: 3rem;
+  margin: 3rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.trojan-section::before {
+  content: "🎯";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  font-size: 200px;
+  opacity: 0.1;
+}
+
+/* Revenue Chart */
+.revenue-visual {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 400px;
+  margin: 3rem 0;
+}
+
+.revenue-bar {
+  width: 200px;
+  background: linear-gradient(180deg, #00ff41 0%, #00aa22 100%);
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.revenue-bar:hover {
+  transform: scaleY(1.1);
+}
+
+.revenue-bar.current {
+  height: 40%;
+  background: linear-gradient(180deg, #666 0%, #444 100%);
+}
+
+.revenue-bar.enhanced {
+  height: 100%;
+}
+
+.bar-label {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+.bar-value {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+  margin: 3rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00ff41 0%, #00ccff 50%, #ffaa00 100%);
+}
+
+.timeline-item {
+  position: relative;
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+}
+
+.timeline-dot {
+  width: 30px;
+  height: 30px;
+  background: #00ff41;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 20px #00ff41;
+}
+
+/* CTA Button */
+.cta-button {
+  display: inline-block;
+  padding: 1.5rem 4rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #00ff41 0%, #00ccff 100%);
+  color: #0a0e27;
+  text-decoration: none;
+  border-radius: 50px;
+  margin: 2rem 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,255,65,0.3);
+}
+
+.cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,255,65,0.5);
+}
+
+/* Slide Backgrounds */
+.slide1 { background: linear-gradient(180deg, #0a0e27 0%, #1a1e37 100%); }
+.slide2 { background: linear-gradient(180deg, #1a1e37 0%, #2a2e47 100%); }
+.slide3 { background: linear-gradient(180deg, #2a2e47 0%, #1a1e37 100%); }
+.slide4 { background: linear-gradient(180deg, #1a1e37 0%, #0a0e27 100%); }
+
+/* Warning Box */
+.warning-box {
+  background: rgba(255,68,68,0.1);
+  border: 2px solid #ff4444;
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+/* Success Box */
+.success-box {
+  background: rgba(0,255,65,0.1);
+  border: 2px solid #00ff41;
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+/* Comparison Table */
+.comparison-table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.comparison-table th {
+  background: rgba(0,204,255,0.1);
+  color: #00ccff;
+  font-size: 1.3rem;
+}
+
+.comparison-table tr:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.before { color: #ff4444; }
+.after { color: #00ff41; }
+
+/* Navigation */
+.nav-dots {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.nav-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  margin: 10px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+  background: #00ff41;
+  box-shadow: 0 0 10px #00ff41;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  .huge-number { font-size: 5rem; }
+  .revenue-bar { width: 100px; }
+  .timeline-item { width: 50%; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation Dots -->
+<div class="nav-dots">
+  <div class="nav-dot active" onclick="scrollToSlide(0)"></div>
+  <div class="nav-dot" onclick="scrollToSlide(1)"></div>
+  <div class="nav-dot" onclick="scrollToSlide(2)"></div>
+  <div class="nav-dot" onclick="scrollToSlide(3)"></div>
+  <div class="nav-dot" onclick="scrollToSlide(4)"></div>
+  <div class="nav-dot" onclick="scrollToSlide(5)"></div>
+  <div class="nav-dot" onclick="scrollToSlide(6)"></div>
+</div>
+
+<!-- SLIDE 1: The Hook -->
+<div class="slide slide1" id="slide0">
+  <div class="slide-content animate-in">
+    <h1>Your AI Opportunity Scraper Found Something...</h1>
+    <div class="opportunity-card">
+      <p class="huge-number">$5.7M</p>
+      <h2>In Untapped Annual Revenue</h2>
+      <p>From the 30+ opportunities you identified but never pursued</p>
+    </div>
+    <p style="font-size: 2rem; color: #ffaa00;">Ready to capture it without changing your business model?</p>
+  </div>
+</div>
+
+<!-- SLIDE 2: The Problem -->
+<div class="slide slide2" id="slide1">
+  <div class="slide-content">
+    <h2>The Painful Truth</h2>
+    <div class="metric-grid">
+      <div class="metric-box">
+        <div class="metric-value">30+</div>
+        <div class="metric-label">Opportunities Identified</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-value">$500K</div>
+        <div class="metric-label">Monthly Value</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-value">0</div>
+        <div class="metric-label">Opportunities Captured</div>
+      </div>
+    </div>
+    <div class="warning-box">
+      <h3>Why? Fear of Cannibalizing Your Billable Hours Model</h3>
+      <p>But what if you could have both?</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: The Solution -->
+<div class="slide slide3" id="slide2">
+  <div class="slide-content">
+    <h2>The Revenue Enhancement Strategy</h2>
+    <p style="font-size: 2rem; margin-bottom: 3rem;">Keep Your Model. Triple Your Profits.</p>
+    
+    <div class="revenue-visual">
+      <div class="revenue-bar current">
+        <span class="bar-value">$150/hr</span>
+        <span class="bar-label">Current Rate</span>
+      </div>
+      <div class="revenue-bar enhanced">
+        <span class="bar-value">$225/hr</span>
+        <span class="bar-label">AI-Enhanced Rate</span>
+      </div>
+    </div>
+
+    <div class="success-box">
+      <h3>3 Revenue Streams. Zero Disruption.</h3>
+      <p>Premium Rates + Monthly Retainers + Success Fees</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: How It Works -->
+<div class="slide slide4" id="slide3">
+  <div class="slide-content">
+    <h2>Your Developers Become "AI Engineers"</h2>
+    
+    <table class="comparison-table">
+      <tr>
+        <th>Transformation</th>
+        <th class="before">Before</th>
+        <th class="after">After</th>
+      </tr>
+      <tr>
+        <td>Title</td>
+        <td class="before">Developer</td>
+        <td class="after">AI-Enhanced Engineer</td>
+      </tr>
+      <tr>
+        <td>Hourly Rate</td>
+        <td class="before">$150/hour</td>
+        <td class="after">$225/hour (+50%)</td>
+      </tr>
+      <tr>
+        <td>Client Perception</td>
+        <td class="before">Commodity</td>
+        <td class="after">Premium Expert</td>
+      </tr>
+      <tr>
+        <td>Developer Morale</td>
+        <td class="before">Threatened by AI</td>
+        <td class="after">Empowered by AI</td>
+      </tr>
+    </table>
+
+    <p style="margin-top: 3rem; font-size: 1.8rem;">Same work. Same hours. 50% more revenue.</p>
+  </div>
+</div>
+
+<!-- SLIDE 5: The Numbers -->
+<div class="slide slide1" id="slide4">
+  <div class="slide-content">
+    <h2>The Financial Transformation</h2>
+    
+    <div class="metric-grid">
+      <div class="metric-box">
+        <div class="metric-value">+$3M</div>
+        <div class="metric-label">From Rate Increases</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-value">+$2.4M</div>
+        <div class="metric-label">From AI Retainers</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-value">+$300K</div>
+        <div class="metric-label">From Success Fees</div>
+      </div>
+    </div>
+
+    <div class="opportunity-card">
+      <h3>Total Year 1 Impact</h3>
+      <p class="huge-number">$5.7M</p>
+      <p>Without reducing a single billable hour</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: Implementation Timeline -->
+<div class="slide slide2" id="slide5">
+  <div class="slide-content">
+    <h2>90-Day Transformation Timeline</h2>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>Days 1-30</h3>
+        <p>Position & Enable</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>Days 31-60</h3>
+        <p>Launch Retainers</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>Days 61-90</h3>
+        <p>Scale Success</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>Day 90+</h3>
+        <p>$475K/Month</p>
+      </div>
+    </div>
+
+    <div class="trojan-section">
+      <h3>The Trojan Horse</h3>
+      <p>Use your own opportunity scraper data to close the first 5 clients</p>
+      <p style="font-size: 1.3rem;">They can't argue with their own intelligence showing demand</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: Call to Action -->
+<div class="slide slide3" id="slide6">
+  <div class="slide-content">
+    <h1>The Choice Is Yours</h1>
+    
+    <div class="metric-grid">
+      <div class="warning-box" style="background: rgba(255,68,68,0.2);">
+        <h3>Option A: Status Quo</h3>
+        <p>Watch competitors capture your identified opportunities</p>
+        <p>Lose $500K/month in potential revenue</p>
+        <p>Risk becoming obsolete</p>
+      </div>
+      <div class="success-box" style="background: rgba(0,255,65,0.2);">
+        <h3>Option B: Enhancement</h3>
+        <p>Capture those 30+ opportunities</p>
+        <p>Add $5.7M revenue in Year 1</p>
+        <p>Become THE premium AI consultancy</p>
+      </div>
+    </div>
+
+    <a href="#" class="cta-button" onclick="showContact()">Start Your 90-Day Transformation</a>
+    
+    <p style="margin-top: 3rem; font-size: 1.3rem; color: #ffaa00;">
+      Your opportunity scraper already proved the market exists.<br>
+      Now it's time to capture it.
+    </p>
+  </div>
+</div>
+
+<script>
+// Smooth scrolling
+function scrollToSlide(index) {
+  document.getElementById('slide' + index).scrollIntoView({ behavior: 'smooth' });
+  updateNavDots(index);
+}
+
+// Update navigation dots
+function updateNavDots(index) {
+  const dots = document.querySelectorAll('.nav-dot');
+  dots.forEach((dot, i) => {
+    if (i === index) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+}
+
+// Detect scroll position
+window.addEventListener('scroll', () => {
+  const slides = document.querySelectorAll('.slide');
+  const scrollPos = window.scrollY + window.innerHeight / 2;
+  
+  slides.forEach((slide, index) => {
+    const slideTop = slide.offsetTop;
+    const slideBottom = slideTop + slide.offsetHeight;
+    
+    if (scrollPos >= slideTop && scrollPos <= slideBottom) {
+      updateNavDots(index);
+    }
+  });
+});
+
+// Show contact info
+function showContact() {
+  alert('Ready to transform? Let\'s discuss your 90-day implementation plan.\n\nSchedule a call: calendly.com/your-link\nEmail: your-email@company.com');
+}
+
+// Add entrance animations on scroll
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate-in');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.metric-box, .opportunity-card, .timeline-item').forEach(el => {
+  observer.observe(el);
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  const currentSlide = Math.round(window.scrollY / window.innerHeight);
+  if (e.key === 'ArrowDown' && currentSlide < 6) {
+    scrollToSlide(currentSlide + 1);
+  } else if (e.key === 'ArrowUp' && currentSlide > 0) {
+    scrollToSlide(currentSlide - 1);
+  }
+});
+</script>
+
+</body>
+</html>

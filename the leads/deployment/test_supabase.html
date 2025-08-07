@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supabase Connection Test - Utlyze</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .config-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        button {
+            background: #00c853;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #00a844;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #4caf50;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+        .data-display {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #f5f5f5;
+            font-weight: bold;
+        }
+        .test-section {
+            margin-top: 20px;
+        }
+        .code {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 Supabase Connection Test</h1>
+    
+    <div class="config-section">
+        <h2>Step 1: Enter Your Supabase Credentials</h2>
+        <p>Get these from Supabase Dashboard → Settings → API</p>
+        
+        <label>Project URL:</label>
+        <input type="text" id="supabaseUrl" placeholder="https://xxxxx.supabase.co">
+        
+        <label>Anon/Public Key:</label>
+        <input type="text" id="supabaseKey" placeholder="eyJhbGc...">
+        
+        <button onclick="connectToSupabase()">Connect to Supabase</button>
+        <div id="connectionStatus"></div>
+    </div>
+
+    <div class="config-section test-section" id="testSection" style="display: none;">
+        <h2>Step 2: Test Database Operations</h2>
+        
+        <h3>Test 1: Add a Company</h3>
+        <input type="text" id="companyName" placeholder="Company Name" value="Test Company">
+        <input type="text" id="companyDomain" placeholder="Domain" value="testcompany.com">
+        <button onclick="addCompany()">Add Company</button>
+        
+        <h3>Test 2: Add an Opportunity</h3>
+        <input type="text" id="jobTitle" placeholder="Job Title" value="Solutions Consultant">
+        <input type="text" id="jobUrl" placeholder="Job URL" value="https://indeed.com/job/123">
+        <button onclick="addOpportunity()">Add Opportunity</button>
+        
+        <h3>Test 3: Fetch All Data</h3>
+        <button onclick="fetchOpportunities()">Fetch Opportunities</button>
+        <button onclick="fetchCompanies()">Fetch Companies</button>
+    </div>
+
+    <div class="data-display" id="dataDisplay" style="display: none;">
+        <h2>Data from Supabase</h2>
+        <div id="dataContent"></div>
+    </div>
+
+    <script>
+        let supabase = null;
+        let currentCompanyId = null;
+
+        // Load saved credentials from localStorage
+        window.onload = function() {
+            const savedUrl = localStorage.getItem('supabaseUrl');
+            const savedKey = localStorage.getItem('supabaseKey');
+            
+            if (savedUrl) document.getElementById('supabaseUrl').value = savedUrl;
+            if (savedKey) document.getElementById('supabaseKey').value = savedKey;
+            
+            if (savedUrl && savedKey) {
+                connectToSupabase();
+            }
+        };
+
+        async function connectToSupabase() {
+            const url = document.getElementById('supabaseUrl').value;
+            const key = document.getElementById('supabaseKey').value;
+            
+            if (!url || !key) {
+                showStatus('connectionStatus', 'Please enter both URL and Key', 'error');
+                return;
+            }
+            
+            try {
+                // Save credentials
+                localStorage.setItem('supabaseUrl', url);
+                localStorage.setItem('supabaseKey', key);
+                
+                // Initialize Supabase client
+                supabase = window.supabase.createClient(url, key);
+                
+                // Test connection by fetching companies
+                const { data, error } = await supabase
+                    .from('companies')
+                    .select('count');
+                
+                if (error) throw error;
+                
+                showStatus('connectionStatus', '✅ Connected to Supabase successfully!', 'success');
+                document.getElementById('testSection').style.display = 'block';
+                
+                // Show initial data
+                fetchCompanies();
+                
+            } catch (error) {
+                showStatus('connectionStatus', `❌ Connection failed: ${error.message}`, 'error');
+                console.error('Connection error:', error);
+            }
+        }
+
+        async function addCompany() {
+            if (!supabase) {
+                alert('Please connect to Supabase first');
+                return;
+            }
+            
+            const name = document.getElementById('companyName').value;
+            const domain = document.getElementById('companyDomain').value;
+            
+            try {
+                const { data, error } = await supabase
+                    .from('companies')
+                    .insert([
+                        { 
+                            name: name,
+                            domain: domain,
+                            industry: 'Technology',
+                            size: '100-500',
+                            revenue: '$10M-$50M',
+                            location: 'Salt Lake City, UT'
+                        }
+                    ])
+                    .select()
+                    .single();
+                
+                if (error) throw error;
+                
+                currentCompanyId = data.id;
+                showStatus('connectionStatus', `✅ Company "${name}" added successfully! (ID: ${data.id})`, 'success');
+                
+                // Refresh display
+                fetchCompanies();
+                
+            } catch (error) {
+                showStatus('connectionStatus', `❌ Error adding company: ${error.message}`, 'error');
+                console.error('Error:', error);
+            }
+        }
+
+        async function addOpportunity() {
+            if (!supabase) {
+                alert('Please connect to Supabase first');
+                return;
+            }
+            
+            if (!currentCompanyId) {
+                // Get first company if none selected
+                const { data: companies } = await supabase
+                    .from('companies')
+                    .select('id')
+                    .limit(1)
+                    .single();
+                
+                if (companies) {
+                    currentCompanyId = companies.id;
+                } else {
+                    alert('Please add a company first');
+                    return;
+                }
+            }
+            
+            const jobTitle = document.getElementById('jobTitle').value;
+            const jobUrl = document.getElementById('jobUrl').value;
+            
+            try {
+                const { data, error } = await supabase
+                    .from('opportunities')
+                    .insert([
+                        {
+                            company_id: currentCompanyId,
+                            job_title: jobTitle,
+                            job_url: jobUrl,
+                            source: 'indeed',
+                            score: Math.floor(Math.random() * 100),
+                            stage: 'discovered',
+                            value_min: 100000,
+                            value_max: 200000
+                        }
+                    ])
+                    .select()
+                    .single();
+                
+                if (error) throw error;
+                
+                showStatus('connectionStatus', `✅ Opportunity "${jobTitle}" added successfully!`, 'success');
+                
+                // Refresh display
+                fetchOpportunities();
+                
+            } catch (error) {
+                showStatus('connectionStatus', `❌ Error adding opportunity: ${error.message}`, 'error');
+                console.error('Error:', error);
+            }
+        }
+
+        async function fetchCompanies() {
+            if (!supabase) return;
+            
+            try {
+                const { data, error } = await supabase
+                    .from('companies')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                
+                if (error) throw error;
+                
+                displayData('Companies', data);
+                
+            } catch (error) {
+                showStatus('connectionStatus', `❌ Error fetching companies: ${error.message}`, 'error');
+            }
+        }
+
+        async function fetchOpportunities() {
+            if (!supabase) return;
+            
+            try {
+                const { data, error } = await supabase
+                    .from('opportunities')
+                    .select(`
+                        *,
+                        companies (
+                            name,
+                            domain,
+                            industry
+                        )
+                    `)
+                    .order('score', { ascending: false });
+                
+                if (error) throw error;
+                
+                displayData('Opportunities', data);
+                
+            } catch (error) {
+                showStatus('connectionStatus', `❌ Error fetching opportunities: ${error.message}`, 'error');
+            }
+        }
+
+        function displayData(title, data) {
+            const display = document.getElementById('dataDisplay');
+            const content = document.getElementById('dataContent');
+            
+            display.style.display = 'block';
+            
+            if (!data || data.length === 0) {
+                content.innerHTML = `<p>No ${title.toLowerCase()} found. Add some using the forms above!</p>`;
+                return;
+            }
+            
+            let html = `<h3>${title} (${data.length})</h3>`;
+            html += '<table>';
+            
+            // Headers
+            html += '<tr>';
+            Object.keys(data[0]).forEach(key => {
+                if (typeof data[0][key] !== 'object') {
+                    html += `<th>${key}</th>`;
+                }
+            });
+            html += '</tr>';
+            
+            // Data rows
+            data.forEach(row => {
+                html += '<tr>';
+                Object.entries(row).forEach(([key, value]) => {
+                    if (typeof value !== 'object') {
+                        html += `<td>${value || '-'}</td>`;
+                    }
+                });
+                html += '</tr>';
+            });
+            
+            html += '</table>';
+            
+            // Show the SQL to get this data
+            html += `
+                <div class="code">
+                    <strong>SQL Query:</strong><br>
+                    SELECT * FROM ${title.toLowerCase()} ORDER BY created_at DESC;
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+
+        function showStatus(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.className = `status ${type}`;
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
