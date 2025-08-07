@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Partnership Opportunity Scoring System</title>
+<style>
+  body{font-family:Arial,sans-serif;margin:20px;background:#f0f4f8;}
+  .container{max-width:1200px;margin:0 auto;background:white;padding:30px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+  h1{color:#4a148c;text-align:center;margin-bottom:10px;}
+  .subtitle{text-align:center;color:#666;margin-bottom:30px;font-size:18px;}
+  h2{color:#7b1fa2;border-bottom:3px solid #7b1fa2;padding-bottom:10px;}
+  .scoring-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+  .criteria-section{background:#f3e5f5;padding:20px;border-radius:10px;margin:15px 0;}
+  .criteria-section h3{color:#4a148c;margin-top:0;}
+  table{width:100%;border-collapse:collapse;margin:15px 0;}
+  th,td{padding:12px;text-align:left;border-bottom:1px solid #e0e0e0;}
+  th{background:#e1bee7;font-weight:600;}
+  input[type="number"],input[type="text"],select{width:100%;padding:10px;border:2px solid #ce93d8;border-radius:6px;}
+  input[type="checkbox"]{transform:scale(1.3);margin-right:10px;}
+  button{background:#7b1fa2;color:white;padding:14px 28px;border:none;border-radius:6px;cursor:pointer;font-size:16px;font-weight:bold;}
+  button:hover{background:#6a1b9a;}
+  .results-section{display:none;margin-top:30px;padding:25px;background:#e8f5e9;border-radius:10px;border:2px solid #4caf50;}
+  .score-display{text-align:center;margin:20px 0;}
+  .total-score{font-size:72px;font-weight:bold;margin:10px 0;}
+  .partnership-type{font-size:28px;font-weight:bold;margin:10px 0;}
+  .platinum{color:#6a1b9a;}
+  .gold{color:#ffc107;}
+  .silver{color:#757575;}
+  .bronze{color:#8d6e63;}
+  .recommendation-box{background:white;padding:20px;border-radius:8px;margin:20px 0;}
+  .multiplier-display{background:#e1bee7;padding:15px;border-radius:8px;text-align:center;margin:15px 0;}
+  .multiplier-value{font-size:36px;font-weight:bold;color:#4a148c;}
+  .roi-calculation{background:#f3e5f5;padding:20px;border-radius:8px;margin:20px 0;}
+  .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0;}
+  .metric-card{background:#fafafa;padding:15px;border-radius:6px;text-align:center;border:1px solid #e0e0e0;}
+  .metric-value{font-size:24px;font-weight:bold;color:#7b1fa2;}
+  .metric-label{font-size:14px;color:#666;margin-top:5px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🤝 Partnership Opportunity Scoring System</h1>
+<p class="subtitle">Evaluate potential partners and channel opportunities for AI solutions</p>
+
+<form id="partnershipForm">
+<div class="scoring-grid">
+
+<!-- LEFT COLUMN -->
+<div>
+<div class="criteria-section">
+<h3>1. Company Type & Reach (40 points max)</h3>
+<table>
+<tr>
+  <td width="50%"><strong>Company Type:</strong></td>
+  <td>
+    <select id="companyType" onchange="calculatePartnershipScore()">
+      <option value="5">Direct End User</option>
+      <option value="15">Technology Vendor</option>
+      <option value="20">Consulting Firm</option>
+      <option value="20">System Integrator</option>
+      <option value="15">Managed Service Provider</option>
+      <option value="10">Industry Association</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <td><strong>Client Base Size:</strong></td>
+  <td>
+    <select id="clientBase" onchange="calculatePartnershipScore()">
+      <option value="5">< 10 clients</option>
+      <option value="10">10-50 clients</option>
+      <option value="15">50-200 clients</option>
+      <option value="20">200+ clients</option>
+    </select>
+  </td>
+</tr>
+</table>
+</div>
+
+<div class="criteria-section">
+<h3>2. Strategic Alignment (30 points max)</h3>
+<table>
+<tr>
+  <td colspan="2"><input type="checkbox" id="crmFocus" value="10" onchange="calculatePartnershipScore()">CRM/Salesforce/Dynamics Focus</td>
+</tr>
+<tr>
+  <td colspan="2"><input type="checkbox" id="hasPartnerProgram" value="10" onchange="calculatePartnershipScore()">Existing Partner Program</td>
+</tr>
+<tr>
+  <td colspan="2"><input type="checkbox" id="multipleVerticals" value="5" onchange="calculatePartnershipScore()">Serves Multiple Industries</td>
+</tr>
+<tr>
+  <td colspan="2"><input type="checkbox" id="transformationFocus" value="5" onchange="calculatePartnershipScore()">Digital Transformation Focus</td>
+</tr>
+</table>
+</div>
+
+<div class="criteria-section">
+<h3>3. Technical Compatibility (20 points max)</h3>
+<table>
+<tr>
+  <td colspan="2"><input type="checkbox" id="apiFirst" value="10" onchange="calculatePartnershipScore()">API-First Architecture</td>
+</tr>
+<tr>
+  <td colspan="2"><input type="checkbox" id="cloudNative" value="5" onchange="calculatePartnershipScore()">Cloud Native Platform</td>
+</tr>
+<tr>
+  <td colspan="2"><input type="checkbox" id="integrationNeeds" value="5" onchange="calculatePartnershipScore()">Integration Challenges Mentioned</td>
+</tr>
+</table>
+</div>
+</div>
+
+<!-- RIGHT COLUMN -->
+<div>
+<div class="criteria-section">
+<h3>4. Market Opportunity (10 points max)</h3>
+<table>
+<tr>
+  <td width="50%"><strong>Industry Growth:</strong></td>
+  <td>
+    <select id="industryGrowth" onchange="calculatePartnershipScore()">
+      <option value="2">Stable</option>
+      <option value="5">Growing (10-20%)</option>
+      <option value="10">High Growth (20%+)</option>
+    </select>
+  </td>
+</tr>
+</table>
+</div>
+
+<div class="criteria-section">
+<h3>5. Partnership Details</h3>
+<table>
+<tr>
+  <td width="50%"><strong>Company Name:</strong></td>
+  <td><input type="text" id="partnerName" placeholder="Enter company name"></td>
+</tr>
+<tr>
+  <td><strong>Primary Contact:</strong></td>
+  <td><input type="text" id="contactName" placeholder="Name and title"></td>
+</tr>
+<tr>
+  <td><strong>Industry Focus:</strong></td>
+  <td>
+    <select id="industryFocus">
+      <option>Healthcare</option>
+      <option>Financial Services</option>
+      <option>Manufacturing</option>
+      <option>Retail/E-commerce</option>
+      <option>Construction</option>
+      <option>Field Services</option>
+      <option>Professional Services</option>
+      <option>Multiple Industries</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <td><strong>Annual Revenue:</strong></td>
+  <td><input type="text" id="annualRevenue" placeholder="e.g., $50M"></td>
+</tr>
+</table>
+</div>
+
+<div class="criteria-section">
+<h3>6. Opportunity Indicators</h3>
+<table>
+<tr>
+  <td colspan="2"><input type="checkbox" id="hiringConsultants">Hiring Multiple Consultants</td>
+</tr>
+<tr>
+  <td colspan="2"><input type="checkbox" id="expandingServices">Expanding Service Offerings</td>
+</tr>
+<tr>
+  <td colspan="2"><input type="checkbox" id="seekingPartners">Actively Seeking Partners</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+
+<center style="margin-top:20px;">
+<button type="button" onclick="calculatePartnershipScore()">Calculate Partnership Score</button>
+</center>
+</form>
+
+<!-- RESULTS SECTION -->
+<div id="results" class="results-section">
+<div class="score-display">
+  <div style="font-size:20px;color:#666;">Partnership Score:</div>
+  <div class="total-score" id="totalScore">0</div>
+  <div class="partnership-type" id="partnershipType"></div>
+</div>
+
+<div class="multiplier-display">
+  <div>Revenue Multiplication Factor:</div>
+  <div class="multiplier-value" id="multiplier">1x</div>
+  <div style="font-size:14px;margin-top:10px;">Each AI solution can be deployed to <span id="clientCount">1</span> clients</div>
+</div>
+
+<div class="metric-grid">
+  <div class="metric-card">
+    <div class="metric-value" id="dealSize">$0</div>
+    <div class="metric-label">Avg Deal Size</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="totalPotential">$0</div>
+    <div class="metric-label">Total Potential</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="timeToRevenue">0</div>
+    <div class="metric-label">Months to Revenue</div>
+  </div>
+</div>
+
+<div class="recommendation-box" id="recommendation"></div>
+
+<div class="roi-calculation">
+  <h3>Partnership ROI Projection</h3>
+  <div id="roiDetails"></div>
+</div>
+
+<div style="background:#f5f5f5;padding:20px;border-radius:8px;margin-top:20px;">
+  <h3>Next Steps:</h3>
+  <ol id="nextSteps"></ol>
+</div>
+</div>
+
+</div>
+
+<script>
+function calculatePartnershipScore() {
+  let score = 0;
+  
+  // Company Type & Reach
+  score += parseInt(document.getElementById('companyType').value);
+  score += parseInt(document.getElementById('clientBase').value);
+  
+  // Strategic Alignment
+  const alignmentChecks = ['crmFocus', 'hasPartnerProgram', 'multipleVerticals', 'transformationFocus'];
+  alignmentChecks.forEach(id => {
+    if (document.getElementById(id).checked) {
+      score += parseInt(document.getElementById(id).value);
+    }
+  });
+  
+  // Technical Compatibility
+  const techChecks = ['apiFirst', 'cloudNative', 'integrationNeeds'];
+  techChecks.forEach(id => {
+    if (document.getElementById(id).checked) {
+      score += parseInt(document.getElementById(id).value);
+    }
+  });
+  
+  // Market Opportunity
+  score += parseInt(document.getElementById('industryGrowth').value);
+  
+  // Display results
+  displayPartnershipResults(score);
+}
+
+function displayPartnershipResults(score) {
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('totalScore').textContent = score;
+  
+  const scoreElement = document.getElementById('totalScore');
+  const typeElement = document.getElementById('partnershipType');
+  const recommendationElement = document.getElementById('recommendation');
+  const multiplierElement = document.getElementById('multiplier');
+  const clientCountElement = document.getElementById('clientCount');
+  const dealSizeElement = document.getElementById('dealSize');
+  const totalPotentialElement = document.getElementById('totalPotential');
+  const timeToRevenueElement = document.getElementById('timeToRevenue');
+  const roiDetailsElement = document.getElementById('roiDetails');
+  const nextStepsElement = document.getElementById('nextSteps');
+  
+  // Determine partnership tier
+  if (score >= 80) {
+    scoreElement.className = 'total-score platinum';
+    typeElement.className = 'partnership-type platinum';
+    typeElement.textContent = 'PLATINUM PARTNER';
+    
+    const clientBase = document.getElementById('clientBase').value;
+    let clients = clientBase === '20' ? '200+' : clientBase === '15' ? '50-200' : clientBase === '10' ? '10-50' : '<10';
+    let multiplier = clientBase === '20' ? '50x' : clientBase === '15' ? '20x' : clientBase === '10' ? '10x' : '5x';
+    
+    multiplierElement.textContent = multiplier;
+    clientCountElement.textContent = clients;
+    dealSizeElement.textContent = '$150K';
+    totalPotentialElement.textContent = '$3M+';
+    timeToRevenueElement.textContent = '3-6';
+    
+    recommendationElement.innerHTML = `
+      <h3>🌟 Platinum Partnership Opportunity</h3>
+      <p><strong>Recommendation:</strong> PURSUE IMMEDIATELY - This is a game-changing partnership opportunity.</p>
+      <ul>
+        <li>High multiplication factor across their client base</li>
+        <li>Strategic alignment with AI automation needs</li>
+        <li>Potential to become exclusive AI partner</li>
+        <li>Revenue share or white-label opportunity</li>
+      </ul>
+    `;
+    
+    roiDetailsElement.innerHTML = `
+      <table style="width:100%">
+        <tr><td>Initial Partnership Development:</td><td>$50,000</td></tr>
+        <tr><td>Year 1 Revenue (10 clients):</td><td>$1,500,000</td></tr>
+        <tr><td>Year 2 Revenue (30 clients):</td><td>$4,500,000</td></tr>
+        <tr><td>3-Year Total Revenue:</td><td>$10,000,000+</td></tr>
+        <tr><td><strong>ROI:</strong></td><td><strong>200x</strong></td></tr>
+      </table>
+    `;
+    
+    nextStepsElement.innerHTML = `
+      <li>Schedule executive meeting within 48 hours</li>
+      <li>Prepare custom demo using their industry data</li>
+      <li>Draft partnership agreement terms</li>
+      <li>Identify 3 pilot clients for immediate deployment</li>
+      <li>Create co-marketing plan</li>
+    `;
+    
+  } else if (score >= 60) {
+    scoreElement.className = 'total-score gold';
+    typeElement.className = 'partnership-type gold';
+    typeElement.textContent = 'GOLD PARTNER';
+    
+    multiplierElement.textContent = '10x';
+    clientCountElement.textContent = '10-50';
+    dealSizeElement.textContent = '$100K';
+    totalPotentialElement.textContent = '$1M+';
+    timeToRevenueElement.textContent = '4-8';
+    
+    recommendationElement.innerHTML = `
+      <h3>⭐ Gold Partnership Opportunity</h3>
+      <p><strong>Recommendation:</strong> HIGH PRIORITY - Strong partnership potential with good returns.</p>
+      <ul>
+        <li>Solid client base for solution deployment</li>
+        <li>Good strategic alignment</li>
+        <li>Referral or reseller partnership model</li>
+      </ul>
+    `;
+    
+    roiDetailsElement.innerHTML = `
+      <table style="width:100%">
+        <tr><td>Partnership Development:</td><td>$25,000</td></tr>
+        <tr><td>Year 1 Revenue (5 clients):</td><td>$500,000</td></tr>
+        <tr><td>Year 2 Revenue (15 clients):</td><td>$1,500,000</td></tr>
+        <tr><td>3-Year Total Revenue:</td><td>$3,500,000</td></tr>
+        <tr><td><strong>ROI:</strong></td><td><strong>140x</strong></td></tr>
+      </table>
+    `;
+    
+    nextStepsElement.innerHTML = `
+      <li>Schedule partnership exploration call</li>
+      <li>Share case studies and ROI data</li>
+      <li>Propose pilot program with 2-3 clients</li>
+      <li>Define revenue sharing model</li>
+    `;
+    
+  } else if (score >= 40) {
+    scoreElement.className = 'total-score silver';
+    typeElement.className = 'partnership-type silver';
+    typeElement.textContent = 'SILVER PARTNER';
+    
+    multiplierElement.textContent = '5x';
+    clientCountElement.textContent = '5-20';
+    dealSizeElement.textContent = '$75K';
+    totalPotentialElement.textContent = '$400K';
+    timeToRevenueElement.textContent = '6-12';
+    
+    recommendationElement.innerHTML = `
+      <h3>🥈 Silver Partnership Opportunity</h3>
+      <p><strong>Recommendation:</strong> WORTH PURSUING - Moderate partnership with decent potential.</p>
+      <ul>
+        <li>Limited but quality client opportunities</li>
+        <li>Good for building partnership experience</li>
+        <li>Informal referral arrangement</li>
+      </ul>
+    `;
+    
+    nextStepsElement.innerHTML = `
+      <li>Add to partnership pipeline</li>
+      <li>Send partnership overview deck</li>
+      <li>Propose informal referral agreement</li>
+    `;
+    
+  } else {
+    scoreElement.className = 'total-score bronze';
+    typeElement.className = 'partnership-type bronze';
+    typeElement.textContent = 'DIRECT OPPORTUNITY';
+    
+    multiplierElement.textContent = '1x';
+    clientCountElement.textContent = '1';
+    dealSizeElement.textContent = '$50K';
+    totalPotentialElement.textContent = '$50K';
+    timeToRevenueElement.textContent = '2-4';
+    
+    recommendationElement.innerHTML = `
+      <h3>🎯 Direct Sales Opportunity</h3>
+      <p><strong>Recommendation:</strong> Pursue as direct client rather than partner.</p>
+      <ul>
+        <li>Limited partnership multiplication</li>
+        <li>Better as a direct AI implementation</li>
+        <li>Could evolve into partnership after success</li>
+      </ul>
+    `;
+    
+    nextStepsElement.innerHTML = `
+      <li>Approach as direct sales opportunity</li>
+      <li>Focus on their internal AI needs</li>
+      <li>Revisit partnership after successful implementation</li>
+    `;
+  }
+  
+  // Add to lead tracking
+  const partnerData = {
+    name: document.getElementById('partnerName').value || 'Unnamed',
+    score: score,
+    type: typeElement.textContent,
+    potential: totalPotentialElement.textContent,
+    date: new Date().toLocaleDateString()
+  };
+  
+  // Save to localStorage
+  let partners = JSON.parse(localStorage.getItem('partnershipOpportunities') || '[]');
+  partners.push(partnerData);
+  localStorage.setItem('partnershipOpportunities', JSON.stringify(partners));
+  
+  // Scroll to results
+  document.getElementById('results').scrollIntoView({behavior: 'smooth'});
+}
+</script>
+</body>
+</html>

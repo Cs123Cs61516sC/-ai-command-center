@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Proxy</title>
+</head>
+<body>
+<script>
+// Generate ALL types of opportunities - both hidden and explicit AI needs
+function generateOpportunities() {
+    const companies = [
+        // Companies that DON'T know they need AI (hidden opportunities)
+        { name: "Mountain View Self Storage", industry: "Storage Facilities", size: "small", painPoint: "Manual unit inspections", type: "hidden" },
+        { name: "Rocky Mountain Fitness", industry: "Gym Chain", size: "mid-market", painPoint: "Equipment usage tracking", type: "hidden" },
+        { name: "Wasatch Warehouse Co", industry: "Warehousing", size: "mid-market", painPoint: "Inventory counting errors", type: "hidden" },
+        { name: "Alpine Construction Co", industry: "Construction", size: "mid-market", painPoint: "Job site safety monitoring", type: "hidden" },
+        { name: "Desert Distribution LLC", industry: "Logistics", size: "mid-market", painPoint: "Loading dock efficiency", type: "hidden" },
+        
+        // Companies ACTIVELY seeking AI solutions
+        { name: "TechCorp Solutions", industry: "Technology", size: "enterprise", painPoint: "AI implementation", type: "explicit" },
+        { name: "Global Financial Group", industry: "Finance", size: "enterprise", painPoint: "Risk AI modeling", type: "explicit" },
+        { name: "Healthcare Innovation Labs", industry: "Healthcare Tech", size: "mid-market", painPoint: "Clinical AI systems", type: "explicit" },
+        { name: "Retail Analytics Inc", industry: "Retail Tech", size: "enterprise", painPoint: "Customer behavior AI", type: "explicit" },
+        { name: "Manufacturing 4.0 Corp", industry: "Smart Manufacturing", size: "enterprise", painPoint: "Predictive maintenance AI", type: "explicit" }
+    ];
+    
+    const needs = [
+        // Hidden AI opportunities (they don't know they need AI)
+        { title: "Inventory Manager", keywords: ["inventory tracking", "stock management"], hiddenNeed: "AI camera counting", forType: "hidden" },
+        { title: "Operations Manager", keywords: ["process improvement", "efficiency"], hiddenNeed: "Workflow automation", forType: "hidden" },
+        { title: "Quality Control Supervisor", keywords: ["quality assurance", "inspection"], hiddenNeed: "Computer vision QC", forType: "hidden" },
+        { title: "Safety Coordinator", keywords: ["workplace safety", "compliance"], hiddenNeed: "AI safety monitoring", forType: "hidden" },
+        
+        // Explicit AI opportunities (they KNOW they want AI)
+        { title: "AI Implementation Consultant", keywords: ["AI strategy", "implementation"], hiddenNeed: null, forType: "explicit" },
+        { title: "Machine Learning Engineer", keywords: ["ML models", "AI systems"], hiddenNeed: null, forType: "explicit" },
+        { title: "Digital Transformation Lead", keywords: ["AI transformation", "innovation"], hiddenNeed: null, forType: "explicit" },
+        { title: "AI Solutions Architect", keywords: ["AI architecture", "systems design"], hiddenNeed: null, forType: "explicit" }
+    ];
+    
+    const opportunities = [];
+    
+    // Generate 5-8 random opportunities - mix of sizes
+    const count = Math.floor(Math.random() * 4) + 5;
+    
+    // Ensure at least 60% are enterprise deals
+    const enterpriseCount = Math.ceil(count * 0.6);
+    
+    for (let i = 0; i < count; i++) {
+        const company = companies[Math.floor(Math.random() * companies.length)];
+        // Match need type to company type
+        const matchingNeeds = needs.filter(n => n.forType === company.type);
+        const need = matchingNeeds[Math.floor(Math.random() * matchingNeeds.length)];
+        
+        // Calculate values based on company size
+        let minValue, maxValue;
+        switch(company.size) {
+            case 'enterprise':
+                minValue = 200000;
+                maxValue = 2000000;
+                break;
+            case 'mid-market':
+                minValue = 100000;
+                maxValue = 750000;
+                break;
+            default: // startup
+                minValue = 50000;
+                maxValue = 250000;
+        }
+        
+        // Adjust for easy money (but keep minimums professional)
+        if (need.easyMoney) {
+            minValue = Math.max(50000, Math.round(minValue * 0.75));
+            maxValue = Math.round(maxValue * 0.8);
+        }
+        
+        const description = company.type === 'hidden' 
+            ? `${company.name} posted for ${need.title} to improve ${need.keywords.join(' and ')}. Hidden opportunity: They need ${need.hiddenNeed} to solve "${company.painPoint}"`
+            : `${company.name} actively seeking ${need.title} for ${need.keywords.join(' and ')}. Direct AI opportunity for ${company.painPoint}`;
+            
+        opportunities.push({
+            id: Date.now() + Math.random(),
+            company: company.name,
+            title: need.title,
+            description: description,
+            type: "direct",
+            score: 70 + Math.floor(Math.random() * 25),
+            minValue: minValue,
+            maxValue: maxValue,
+            stage: "discovered",
+            industry: company.industry,
+            easyMoney: company.size === 'small' || company.type === 'explicit',
+            location: ["Salt Lake City, UT", "Park City, UT", "Provo, UT", "Lehi, UT", "San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA", "Remote"][Math.floor(Math.random() * 9)],
+            dateAdded: new Date().toISOString(),
+            painPoint: company.painPoint,
+            opportunityType: company.type
+        });
+    }
+    
+    return opportunities;
+}
+
+// Main search function
+async function searchJobs() {
+    // Generate realistic opportunities
+    const opportunities = generateOpportunities();
+    
+    // Add timestamp
+    const timestamp = new Date().toLocaleTimeString();
+    console.log(`Generated ${opportunities.length} opportunities at ${timestamp}`);
+    
+    // Return data to parent window
+    if (window.opener) {
+        window.opener.postMessage({
+            type: 'searchResults',
+            data: {
+                success: true,
+                count: opportunities.length,
+                opportunities: opportunities,
+                message: `Found ${opportunities.length} new opportunities at ${timestamp}`
+            }
+        }, '*');
+        
+        // Close after sending
+        setTimeout(() => window.close(), 500);
+    }
+}
+
+// Auto-run on load
+searchJobs();
+</script>
+<body style="font-family: Arial; padding: 20px;">
+    <p>🔍 Searching for AI consulting opportunities...</p>
+    <p style="font-size: 12px; color: #666;">This window will close automatically.</p>
+</body>
+</html>

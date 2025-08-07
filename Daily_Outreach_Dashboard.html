@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daily AI Opportunity Outreach Dashboard</title>
+<style>
+  body{font-family:Arial,sans-serif;margin:0;background:#1a237e;color:white;}
+  .dashboard{display:grid;grid-template-columns:1fr 2fr 1fr;gap:20px;padding:20px;max-width:1600px;margin:0 auto;}
+  .panel{background:white;color:#333;border-radius:10px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+  h1{text-align:center;margin:20px 0;font-size:28px;}
+  h2{margin:0 0 15px 0;color:#0066cc;border-bottom:2px solid #0066cc;padding-bottom:10px;}
+  .metric{background:#f5f5f5;padding:15px;border-radius:8px;margin:10px 0;text-align:center;}
+  .metric-value{font-size:36px;font-weight:bold;color:#0066cc;}
+  .metric-label{font-size:14px;color:#666;margin-top:5px;}
+  .task-list{list-style:none;padding:0;}
+  .task-list li{background:#e3f2fd;margin:8px 0;padding:12px;border-radius:5px;border-left:4px solid #0066cc;}
+  .task-list input[type="checkbox"]{margin-right:10px;transform:scale(1.3);}
+  .opportunity-card{background:#f9f9f9;border:2px solid #ddd;border-radius:8px;padding:15px;margin:10px 0;}
+  .company-name{font-weight:bold;color:#1976d2;font-size:18px;}
+  .action-button{background:#4caf50;color:white;padding:8px 16px;border:none;border-radius:5px;cursor:pointer;margin:5px;text-decoration:none;display:inline-block;}
+  .action-button:hover{background:#45a049;}
+  .high-priority{border-left:4px solid #d32f2f !important;background:#ffebee !important;}
+  .tracker-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;}
+  .status-badge{padding:4px 12px;border-radius:15px;font-size:12px;font-weight:bold;}
+  .status-new{background:#e3f2fd;color:#1976d2;}
+  .status-contacted{background:#fff9c4;color:#f57c00;}
+  .status-responded{background:#c8e6c9;color:#2e7d32;}
+  .quick-links{background:#e8eaf6;padding:15px;border-radius:8px;margin:15px 0;}
+  .quick-links a{color:#3f51b5;text-decoration:none;display:block;margin:5px 0;}
+  .quick-links a:hover{text-decoration:underline;}
+  .timer{background:#ff5722;color:white;padding:10px;border-radius:5px;text-align:center;font-size:18px;margin:10px 0;}
+  #currentTime{font-size:20px;font-weight:bold;}
+</style>
+</head>
+<body>
+<h1>🚀 AI Opportunity Daily Outreach Dashboard</h1>
+
+<div class="dashboard">
+
+<!-- LEFT PANEL: Daily Goals & Metrics -->
+<div class="panel">
+<h2>📊 Today's Goals</h2>
+<div class="metric">
+  <div class="metric-value" id="outreachGoal">10</div>
+  <div class="metric-label">Outreach Target</div>
+</div>
+<div class="metric">
+  <div class="metric-value" id="outreachDone">0</div>
+  <div class="metric-label">Completed Today</div>
+</div>
+<div class="metric">
+  <div class="metric-value" id="responseRate">0%</div>
+  <div class="metric-label">Response Rate</div>
+</div>
+
+<h2>⏰ Optimal Times</h2>
+<div class="timer">
+  Best Time: <span id="currentTime"></span>
+  <div style="font-size:14px;margin-top:5px;">
+    ✅ 10:00 AM - 11:00 AM<br>
+    ✅ 2:00 PM - 3:00 PM
+  </div>
+</div>
+
+<h2>📋 Daily Checklist</h2>
+<ul class="task-list">
+  <li><input type="checkbox" id="task1"> Review new job postings</li>
+  <li><input type="checkbox" id="task2"> Score top 5 opportunities</li>
+  <li><input type="checkbox" id="task3"> Research decision makers</li>
+  <li><input type="checkbox" id="task4"> Send 5 emails</li>
+  <li><input type="checkbox" id="task5"> Send 5 LinkedIn messages</li>
+  <li><input type="checkbox" id="task6"> Follow up on pending</li>
+  <li><input type="checkbox" id="task7"> Update tracking sheet</li>
+</ul>
+
+<h2>🔗 Quick Links</h2>
+<div class="quick-links">
+  <a href="https://www.indeed.com" target="_blank">→ Indeed Job Search</a>
+  <a href="https://www.linkedin.com/jobs/" target="_blank">→ LinkedIn Jobs</a>
+  <a href="https://hunter.io" target="_blank">→ Email Finder</a>
+  <a href="file:///C:/Users/carls/OneDrive/Desktop/Utlyze%20lead%20gen%20program/the%20search/AI_Outreach_Templates.txt" target="_blank">→ Email Templates</a>
+  <a href="file:///C:/Users/carls/OneDrive/Desktop/Utlyze%20lead%20gen%20program/the%20search/Opportunity_Scoring_System.html" target="_blank">→ Scoring System</a>
+</div>
+</div>
+
+<!-- CENTER PANEL: Hot Opportunities -->
+<div class="panel">
+<h2>🔥 Today's Hot Opportunities</h2>
+
+<div class="opportunity-card high-priority">
+  <div class="company-name">1. Cafe Rio - 139 AP Positions</div>
+  <div class="tracker-grid">
+    <div>Value: $6.9M total opportunity</div>
+    <div>Status: <span class="status-badge status-new">NEW</span></div>
+  </div>
+  <p>Target: CFO/Controller for multi-location invoice automation</p>
+  <a href="https://www.linkedin.com/company/cafe-rio/people/" target="_blank" class="action-button">Research on LinkedIn</a>
+  <button class="action-button" onclick="markContacted('cafe-rio')">Mark as Contacted</button>
+</div>
+
+<div class="opportunity-card high-priority">
+  <div class="company-name">2. Valley Behavioral Health - Healthcare AP</div>
+  <div class="tracker-grid">
+    <div>Value: $200K+ annually</div>
+    <div>Status: <span class="status-badge status-new">NEW</span></div>
+  </div>
+  <p>Target: Revenue Cycle Director for HIPAA-compliant automation</p>
+  <a href="https://www.linkedin.com/company/valley-behavioral-health/people/" target="_blank" class="action-button">Research on LinkedIn</a>
+  <button class="action-button" onclick="markContacted('valley-behavioral')">Mark as Contacted</button>
+</div>
+
+<div class="opportunity-card">
+  <div class="company-name">3. Telarus - Reporting Analysts</div>
+  <div class="tracker-grid">
+    <div>Value: $350K project</div>
+    <div>Status: <span class="status-badge status-new">NEW</span></div>
+  </div>
+  <p>Target: VP Operations for Excel → automated analytics transformation</p>
+  <a href="https://www.linkedin.com/company/telarus/people/" target="_blank" class="action-button">Research on LinkedIn</a>
+  <button class="action-button" onclick="markContacted('telarus')">Mark as Contacted</button>
+</div>
+
+<div class="opportunity-card">
+  <div class="company-name">4. ChannelBound - ACA Reporting</div>
+  <div class="tracker-grid">
+    <div>Value: $150K+ annually</div>
+    <div>Status: <span class="status-badge status-new">NEW</span></div>
+  </div>
+  <p>Target: CEO/Compliance Director for automated compliance reporting</p>
+  <a href="https://www.linkedin.com/company/channelbound/people/" target="_blank" class="action-button">Research on LinkedIn</a>
+  <button class="action-button" onclick="markContacted('channelbound')">Mark as Contacted</button>
+</div>
+
+<div class="opportunity-card">
+  <div class="company-name">5. Associated Food Stores - AP Team</div>
+  <div class="tracker-grid">
+    <div>Value: $300K+ annually</div>
+    <div>Status: <span class="status-badge status-new">NEW</span></div>
+  </div>
+  <p>Target: Controller for vendor invoice automation</p>
+  <a href="https://www.linkedin.com/company/associated-food-stores/people/" target="_blank" class="action-button">Research on LinkedIn</a>
+  <button class="action-button" onclick="markContacted('associated-food')">Mark as Contacted</button>
+</div>
+
+<h2>📝 Outreach Template for Today</h2>
+<div style="background:#f5f5f5;padding:15px;border-radius:8px;font-family:monospace;font-size:14px;">
+Subject: Re: [POSITION] Opening - 75% Cost Reduction Available<br><br>
+Hi [NAME],<br><br>
+I noticed you're hiring multiple [POSITION] roles. That's roughly $[AMOUNT] annually in salaries alone.<br><br>
+What if one AI solution could handle all these positions for 75% less cost?<br><br>
+We recently helped [SIMILAR COMPANY] automate their [PROCESS], reducing processing time by 85%.<br><br>
+Worth a quick 15-minute call to explore?<br><br>
+Best,<br>
+[YOUR NAME]
+</div>
+</div>
+
+<!-- RIGHT PANEL: Progress Tracking -->
+<div class="panel">
+<h2>📈 Week Progress</h2>
+<div class="metric">
+  <div class="metric-value">23</div>
+  <div class="metric-label">Total Outreaches</div>
+</div>
+<div class="metric">
+  <div class="metric-value">4</div>
+  <div class="metric-label">Responses</div>
+</div>
+<div class="metric">
+  <div class="metric-value">2</div>
+  <div class="metric-label">Meetings Booked</div>
+</div>
+
+<h2>🎯 Follow-ups Due</h2>
+<ul class="task-list">
+  <li class="high-priority">Tech Company X - Day 4 follow-up</li>
+  <li>Healthcare Y - Day 11 follow-up</li>
+  <li>Retail Z - Final follow-up</li>
+</ul>
+
+<h2>💡 Today's Tips</h2>
+<div style="background:#e8f5e9;padding:15px;border-radius:8px;margin:10px 0;">
+  <strong>Tip #1:</strong> Check who viewed the job posting on LinkedIn - they're likely the hiring manager!<br><br>
+  <strong>Tip #2:</strong> Tuesday 10 AM has 23% higher open rates than other times.<br><br>
+  <strong>Tip #3:</strong> Reference a specific number from their job post in your subject line.
+</div>
+
+<h2>📊 Conversion Funnel</h2>
+<div style="background:#f5f5f5;padding:10px;border-radius:8px;text-align:center;">
+  <div>Outreach → 10% Response</div>
+  <div>↓</div>
+  <div>Response → 50% Meeting</div>
+  <div>↓</div>
+  <div>Meeting → 30% Proposal</div>
+  <div>↓</div>
+  <div>Proposal → 40% Close</div>
+  <div style="margin-top:10px;font-weight:bold;">
+    = 0.6% Overall Conversion<br>
+    Need 167 outreaches per deal
+  </div>
+</div>
+</div>
+
+</div>
+
+<script>
+// Update current time
+function updateTime() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('currentTime').textContent = timeString;
+  
+  // Highlight if it's optimal time
+  const hour = now.getHours();
+  const timeDiv = document.getElementById('currentTime').parentElement;
+  if (hour === 10 || hour === 14) {
+    timeDiv.style.background = '#4caf50';
+  } else {
+    timeDiv.style.background = '#ff5722';
+  }
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// Track daily progress
+let dailyCount = parseInt(localStorage.getItem('dailyOutreach') || '0');
+document.getElementById('outreachDone').textContent = dailyCount;
+
+function markContacted(company) {
+  dailyCount++;
+  localStorage.setItem('dailyOutreach', dailyCount);
+  document.getElementById('outreachDone').textContent = dailyCount;
+  
+  // Update response rate
+  const responses = 4; // This would come from your tracking
+  const rate = ((responses / Math.max(dailyCount, 1)) * 100).toFixed(0);
+  document.getElementById('responseRate').textContent = rate + '%';
+  
+  alert('Marked ' + company + ' as contacted! Daily count: ' + dailyCount);
+}
+
+// Reset daily count at midnight
+const now = new Date();
+const night = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+const msToMidnight = night.getTime() - now.getTime();
+setTimeout(() => {
+  localStorage.setItem('dailyOutreach', '0');
+  location.reload();
+}, msToMidnight);
+
+// Save checkbox states
+document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+  checkbox.checked = localStorage.getItem(checkbox.id) === 'true';
+  checkbox.addEventListener('change', function() {
+    localStorage.setItem(this.id, this.checked);
+  });
+});
+</script>
+</body>
+</html>

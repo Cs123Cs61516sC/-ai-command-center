@@ -1,0 +1,132 @@
+AI BUSINESS OPPORTUNITY MINING FROM JOB POSTINGS
+===============================================
+
+STRATEGY: Use job postings to identify companies that need AI automation
+
+BEST JOB TITLES TO SEARCH (High AI Replacement Potential):
+---------------------------------------------------------
+DATA & REPORTING:
+- Data Entry Specialist/Clerk
+- Reporting Analyst
+- Business Analyst (Excel-heavy)
+- Data Reconciliation Specialist
+- Database Administrator
+
+CUSTOMER SERVICE:
+- Customer Service Representative (high volume)
+- Chat Support Specialist
+- Email Response Specialist
+- Order Processing Clerk
+
+OPERATIONS:
+- Operations Coordinator
+- Scheduling Coordinator
+- Inventory Analyst
+- Quality Assurance Analyst
+- Compliance Coordinator
+
+FINANCE:
+- Accounts Payable/Receivable Clerk
+- Invoice Processing Specialist
+- Financial Reconciliation Analyst
+- Expense Report Processor
+
+SALES/MARKETING:
+- Lead Generation Specialist
+- CRM Data Specialist
+- Marketing Operations Coordinator
+- Sales Operations Analyst
+
+GOLDEN PHRASES IN JOB DESCRIPTIONS:
+-----------------------------------
+🎯 "Manually update multiple systems"
+🎯 "Reconcile data between platforms"
+🎯 "Generate daily/weekly reports"
+🎯 "Monitor and respond to emails"
+🎯 "Track in spreadsheets"
+🎯 "Ensure data accuracy"
+🎯 "Process high volume of..."
+🎯 "Repetitive tasks"
+🎯 "Copy data from one system to another"
+
+OPPORTUNITY CALCULATION:
+-----------------------
+When you find a job posting:
+
+1. CALCULATE CURRENT COST:
+   - Salary: $X/year
+   - Benefits (add 30%): $X * 0.3
+   - Training/Turnover (add 20%): $X * 0.2
+   - Total Human Cost = $X * 1.5
+
+2. AI SOLUTION PRICING:
+   - One-time build: 50-75% of annual human cost
+   - Ongoing support: 10-20% of annual human cost
+   - 3-year TCO: Still 50% cheaper than human
+
+3. VALUE PROPOSITION:
+   - Works 24/7 (3x productivity)
+   - No sick days or turnover
+   - 99.9% accuracy vs 95% human
+   - Scales instantly
+
+OUTREACH TEMPLATE:
+-----------------
+Subject: Re: [Job Title] Position - AI Alternative Available
+
+Hi [Hiring Manager],
+
+I noticed you're looking for a [Job Title] to handle [main responsibilities]. 
+
+What if you could accomplish all these tasks with 99.9% accuracy, 24/7 availability, and no turnover risk?
+
+We've helped companies like yours automate exactly these processes:
+- [Specific task from job description]
+- [Another specific task]
+- [Third specific task]
+
+The investment is typically 50-75% of the annual salary, with ROI in under 6 months.
+
+Worth a quick conversation?
+
+TRACKING SPREADSHEET COLUMNS:
+----------------------------
+- Company Name
+- Job Title Posted
+- Salary Range
+- Key Manual Tasks
+- # of Positions (multiply opportunity)
+- AI Solution Value
+- Decision Maker (from job post)
+- LinkedIn Profile
+- Contact Status
+- Proposal Sent
+- Result
+
+HIGH-VALUE INDICATORS:
+---------------------
+✓ Multiple positions for same role (5 data entry = $200K+ opportunity)
+✓ "Urgent" or "Immediate need"
+✓ Large company (more budget)
+✓ Tech-forward industry
+✓ Remote position (already digital-minded)
+
+WHERE TO SEARCH:
+---------------
+- Indeed: Best for volume
+- LinkedIn: Best for decision maker info
+- Glassdoor: See company reviews about inefficiencies
+- AngelList: Startups ready to scale
+- Industry-specific boards
+
+SEARCH QUERY EXAMPLES:
+--------------------
+"data entry" AND "multiple systems"
+"customer service" AND "high volume"
+"reconciliation" AND "spreadsheet"
+"manual process" AND "coordinator"
+"reporting analyst" AND "excel"
+
+COMPETITIVE INTELLIGENCE:
+------------------------
+If they're hiring for these roles, their competitors probably need the same solution. One successful implementation can lead to an entire industry vertical.
