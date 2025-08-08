@@ -1,16 +1,15 @@
 // api/search-supabase.js
-const Parser = require('rss-parser');
-const axios = require('axios');
-const { createClient } = require('@supabase/supabase-js');
+import Parser from 'rss-parser';
+import axios from 'axios';
+import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
-const CLEARBIT_API_KEY = process.env.CLEARBIT_API_KEY;
+export const config = {
+  runtime: 'nodejs',
+};
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+const parser = new Parser();
 
 async function searchIndeed(keywords) {
-  const parser = new Parser();
   const feed = await parser.parseURL(`https://www.indeed.com/rss?q=${encodeURIComponent(keywords)}`);
   return feed.items.map(item => {
     const m = item.title.match(/^(.*) - (.*?) -/);
@@ -54,12 +53,12 @@ function estimateValue(job_title) {
   return { min: 50000, max: 100000 };
 }
 
-async function enrichCompany(name) {
-  if (!CLEARBIT_API_KEY || !name) return null;
+async function enrichCompany(name, apiKey) {
+  if (!apiKey || !name) return null;
   try {
     const res = await axios.get('https://company.clearbit.com/v2/companies/find', {
       params: { name },
-      headers: { Authorization: `Bearer ${CLEARBIT_API_KEY}` }
+      headers: { Authorization: `Bearer ${apiKey}` }
     });
     return {
       name: res.data.name,
@@ -73,18 +72,71 @@ async function enrichCompany(name) {
   }
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
+  // CORS headers - MUST be on EVERY response
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'content-type');
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
+  // Handle GET for testing
+  if (req.method === 'GET') {
+    return res.status(200).json({ 
+      status: 'API endpoint is working',
+      message: 'Use POST with keywords to search',
+      env: {
+        hasSupabaseUrl: !!process.env.SUPABASE_URL,
+        hasSupabaseKey: !!process.env.SUPABASE_SERVICE_KEY,
+        hasClearbitKey: !!process.env.CLEARBIT_API_KEY
+      }
+    });
+  }
+  
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Get environment variables
+  const SUPABASE_URL = process.env.SUPABASE_URL;
+  const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+  const CLEARBIT_API_KEY = process.env.CLEARBIT_API_KEY;
+
+  // Check for required environment variables
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+    return res.status(500).json({ 
+      error: 'Missing configuration',
+      details: 'SUPABASE_URL and SUPABASE_SERVICE_KEY environment variables are required',
+      debug: {
+        hasUrl: !!SUPABASE_URL,
+        hasKey: !!SUPABASE_SERVICE_KEY
+      }
+    });
+  }
+
+  // Create Supabase client
+  let supabase;
+  try {
+    supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+  } catch (error) {
+    return res.status(500).json({ 
+      error: 'Failed to initialize Supabase client',
+      details: error.message
+    });
+  }
 
   const keywords = (req.body && req.body.keywords) || '';
-  if (!keywords) return res.status(400).json({ error: 'Keywords required' });
+  if (!keywords) {
+    return res.status(400).json({ error: 'Keywords required' });
+  }
 
   try {
     const postings = await searchIndeed(keywords);
     const newOps = [];
+    
     for (const p of postings) {
       const score = calculateOpportunityScore(p.description);
       const { min, max } = estimateValue(p.job_title);
@@ -92,31 +144,67 @@ module.exports = async (req, res) => {
       // Upsert company
       let companyId = null;
       if (p.company_name) {
-        const { data: existing } = await supabase.from('companies')
-          .select('id').eq('name', p.company_name).limit(1).single();
+        // Check if company exists
+        const { data: existing, error: fetchError } = await supabase
+          .from('companies')
+          .select('id')
+          .eq('name', p.company_name)
+          .limit(1)
+          .maybeSingle();
+        
+        if (fetchError) {
+          console.error('Error fetching company:', fetchError);
+          continue;
+        }
+        
         if (existing) {
           companyId = existing.id;
         } else {
-          const enriched = await enrichCompany(p.company_name);
-          const { data: inserted } = await supabase.from('companies')
+          // Try to enrich company data
+          const enriched = await enrichCompany(p.company_name, CLEARBIT_API_KEY);
+          
+          // Insert new company
+          const { data: inserted, error: insertError } = await supabase
+            .from('companies')
             .insert([{
               name: p.company_name,
               domain: enriched?.domain || null,
               industry: enriched?.industry || null,
               size: enriched?.size || null,
               location: enriched?.location || null
-            }]).select('id').single();
+            }])
+            .select('id')
+            .single();
+          
+          if (insertError) {
+            console.error('Error inserting company:', insertError);
+            continue;
+          }
+          
           companyId = inserted.id;
         }
       }
+      
       if (!companyId) continue;
 
-      // Check duplicate
-      const { data: dup } = await supabase.from('opportunities')
-        .select('id').eq('company_id', companyId).eq('job_title', p.job_title).maybeSingle();
+      // Check for duplicate opportunity
+      const { data: dup, error: dupError } = await supabase
+        .from('opportunities')
+        .select('id')
+        .eq('company_id', companyId)
+        .eq('job_title', p.job_title)
+        .maybeSingle();
+      
+      if (dupError) {
+        console.error('Error checking duplicate:', dupError);
+        continue;
+      }
+      
       if (dup) continue;
 
-      const { data: newOpp } = await supabase.from('opportunities')
+      // Insert new opportunity
+      const { data: newOpp, error: oppError } = await supabase
+        .from('opportunities')
         .insert([{
           company_id: companyId,
           job_title: p.job_title,
@@ -126,12 +214,29 @@ module.exports = async (req, res) => {
           stage: 'discovered',
           value_min: min,
           value_max: max
-        }]).select('*').single();
+        }])
+        .select('*')
+        .single();
+      
+      if (oppError) {
+        console.error('Error inserting opportunity:', oppError);
+        continue;
+      }
+      
       newOps.push(newOpp);
     }
-    res.status(200).json({ inserted: newOps.length, opportunities: newOps });
+    
+    res.status(200).json({ 
+      success: true,
+      inserted: newOps.length, 
+      opportunities: newOps 
+    });
+    
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    console.error('Search error:', err);
+    res.status(500).json({ 
+      error: 'Server error',
+      details: err.message
+    });
   }
-};
+}
